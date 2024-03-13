@@ -8,13 +8,21 @@
 - Diploma, Eletronic and Telecommunication| Sandip Polytechnic (_May 2019_)
 
 ## Work Experience
-**Data Scientist @ Toyota Financial Services (_June 2022 - Present_)**
-- Uncovered and corrected missing step in production data pipeline which impacted over 70% of active accounts
-- Redeveloped loan originations model which resulted in 50% improvement in model performance and saving 1 million dollars in potential losses
 
-**Data Science Consultant @ Shawhin Talebi Ventures LLC (_December 2020 - Present_)**
-- Conducted data collection, processing, and analysis for novel study evaluating the impact of over 300 biometrics variables on human performance in hyper-realistic, live-fire training scenarios
-- Applied unsupervised deep learning approaches to longitudinal ICU data to discover novel sepsis sub-phenotypes
+** Lab Admin @ wafer characterization Lab (_July 2022 - Present_)**
+- In our Characterization lab, we boast a state-of-the-art wafer station equipped with world-class technology. Our characterization process is enhanced by high-quality wafers, ensuring precise and reliable results. Additionally, we utilize SMu (Source Measure Unit) for comprehensive support in conducting accurate measurements throughout the characterization process.
+  
+**Research And Teaching Assistant @ Course ES 116 (_Jan 2024 - Present (3 months)_)**
+- As a teaching assistant, I have successfully fulfilled responsibilities such as conducting tutorials, assisting with labs and projects, and ensuring fair and thorough grading in my assigned courses.
+
+**Research And Teaching Assistant @ Course FP 602 (_Jan 2024 - Mar 2024 (3 months)_)**
+- The FP 602 TA supports the instructor by leading tutorials, grading assignments, and aiding student understanding. Knowledgeable and approachable, they foster a positive learning environment, handling administrative tasks for effective communication.
+
+**Project Intern @ SARVAA RESEARCH AND INNOVATION PRIVATE LIMITED (_May 2021 - Nov 2021 (7 months)_)**
+
+**Project Intern @ E-smart(_May 2018 - Jun 2018 (2 months)_)**
+
+
 
 ## Projects
 ### Data-Driven EEG Band Discovery with Decision Trees
