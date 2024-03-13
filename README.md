@@ -3,7 +3,7 @@
 #### Technical Skills: Sentaurus TCAD, cadence virtuoso, Device Characterization, Analog Circuit Design, EasyExpert, Velox, MATLAB
 
 ## Education
-- Ph.D, Semiconductor Devices | IIT Gandhinagar (_Pursuing _)								       		
+- Ph.D, Semiconductor Devices | IIT Gandhinagar (_Pursuing_)								       		
 - B.Tech, Eletronic and Telecommunication	| VIIT Pune (_June 2022_)	 			        		
 - Diploma, Eletronic and Telecommunication| Sandip Polytechnic (_May 2019_)
 
