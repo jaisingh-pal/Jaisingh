@@ -105,7 +105,7 @@ The simulation involves creating layers that represent the different semiconduct
  - In-depth analysis of SiGe HBT operation principles.
  - Examination of key performance parameters, including current gain, cutoff frequency, and noise characteristics.
 
-3. **Material Considerations:**
+3. Material Considerations:
  - Discussion on the challenges and advancements in material engineering.
  - Integration of SiGe with silicon and other materials to optimize device performance.
 
