@@ -49,7 +49,7 @@ The simulation involves creating layers that represent the different semiconduct
 
 4. Potential for 3D Integration: CFETs hold the potential for seamless integration into three-dimensional (3D) architectures, paving the way for compact and highly efficient semiconductor devices. This feature aligns with the industry's pursuit of miniaturization and improved chip density.
 
-![CFET 3D Structure](/assets/img/bike_study.jpeg)
+![CFET 3D Structure](CFET 3D Structure.jpeg)
 
 ### Radiation-Hardened 14T SRAM Bitcell With Speed and Power Optimized for Space Application.
 
@@ -59,8 +59,8 @@ The simulation involves creating layers that represent the different semiconduct
 
 3. Low-Power Design: Proficient in employing low-power design methodologies to minimize energy consumption, ensuring reliable and sustainable operation in space applications.
 
-![Radiation Strike on the Circuit.](/assets/img/bike_study.jpeg)
-![RSP 14T Schematic and Result.](/assets/img/bike_study.jpeg)
+![Radiation Strike on the Circuit.](Radiation Strike on the Circuit..jpeg)
+![RSP 14T Schematic and Result.](RSP 14T Schematic and Result..jpeg)
 
 ### Analog Circuit Design
 
