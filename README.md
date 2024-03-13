@@ -1,11 +1,11 @@
-# Data Scientist
+# Jaisingh Pal
 
-#### Technical Skills: Python, SQL, AWS, Snowflake, MATLAB
+#### Technical Skills: Sentaurus TCAD, cadence virtuoso, EasyExpert, Velox, MATLAB
 
 ## Education
-- Ph.D., Physics | The University of Texas at Dallas (_May 2022_)								       		
-- M.S., Physics	| The University of Texas at Dallas (_December 2019_)	 			        		
-- B.S., Physics | The University of Texas at Dallas (_May 2017_)
+- Ph.D, Semiconductor Devices | IIT Gandhinagar (_Pursuing _)								       		
+- B.Tech, Eletronic and Telecommunication	| VIIT Pune (_June 2022_)	 			        		
+- Diploma, Eletronic and Telecommunication| Sandip Polytechnic (_May 2019_)
 
 ## Work Experience
 **Data Scientist @ Toyota Financial Services (_June 2022 - Present_)**
