@@ -887,7 +887,16 @@
     }
 
     /* Light/Dark theme toggle button */
-    #themeToggle {
+    
+
+    #themeToggle i {
+      color: white;
+      font-size: 1.45rem;
+      pointer-events: none;
+      user-select: none;
+      transition: transform 0.4s ease;
+    }
+#themeToggle {
       position: fixed;
       bottom: 26px;
       right: 26px;
@@ -907,15 +916,6 @@
       transition: background-color 0.4s ease;
       user-select: none;
     }
-
-    #themeToggle i {
-      color: white;
-      font-size: 1.45rem;
-      pointer-events: none;
-      user-select: none;
-      transition: transform 0.4s ease;
-    }
-
     #themeToggle:hover,
     #themeToggle:focus {
       background: #4338ca;
