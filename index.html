@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
-    /* Reset and Base */
+    /* Base resets and fonts */
     * {
       margin: 0;
       padding: 0;
@@ -21,12 +21,15 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
       color: #333;
       background: #fafafa;
       overflow-x: hidden;
       scroll-behavior: smooth;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      position: relative;
+      padding-top: 70px; /* For fixed header space */
     }
 
     a {
@@ -38,62 +41,78 @@
       color: #2563eb;
     }
 
-    /* Container */
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
+    /* Scroll Progress Bar */
+    #progressBar {
+      height: 4px;
+      background: linear-gradient(to right, #2563eb, #7c3aed);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      z-index: 13000;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 2px 8px rgb(37 99 235 / 0.55);
+      transition: width 0.3s ease;
+    }
+
     /* Header Navigation */
     header {
       position: fixed;
       top: 0;
-      left: 0;
-      right: 0;
+      width: 100%;
       background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      z-index: 1100;
-      padding: 1rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(22px);
+      z-index: 12000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      user-select: none;
       display: flex;
       justify-content: center;
-      transition: background 0.3s ease;
-      box-shadow: 0 2px 8px rgb(0 0 0 / 0.05);
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
     }
 
     nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       width: 100%;
       max-width: 1200px;
-      position: relative;
-      padding: 0 1rem;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
     }
 
     .logo {
-      font-size: 1.6rem;
-      font-weight: 800;
+      font-weight: 900;
+      font-size: 1.7rem;
+      letter-spacing: 2px;
       color: #2563eb;
-      letter-spacing: 1.5px;
       user-select: none;
-      transition: color 0.3s ease;
+      cursor: default;
     }
 
     .nav-links {
       display: flex;
       list-style: none;
-      gap: 2.2rem;
+      gap: 2.7rem;
     }
 
     .nav-links a {
       font-weight: 600;
       font-size: 1rem;
+      line-height: 1;
       padding: 0.2rem 0;
       position: relative;
       transition: color 0.3s ease;
       user-select: none;
+      letter-spacing: 0.02em;
+      cursor: pointer;
     }
 
     .nav-links a::after {
@@ -102,7 +121,7 @@
       bottom: -6px;
       left: 0;
       width: 0;
-      height: 2.5px;
+      height: 3px;
       background: #2563eb;
       border-radius: 3px;
       transition: width 0.3s ease;
@@ -113,39 +132,56 @@
       width: 100%;
     }
 
-    /* Hamburger Button */
+    /* Hamburger Menu Styles */
     .hamburger {
       display: none;
       flex-direction: column;
       gap: 5px;
       cursor: pointer;
-      z-index: 1200;
+      z-index: 14000;
+      width: 30px;
+      height: 24px;
+      user-select: none;
     }
 
     .hamburger span {
-      width: 28px;
-      height: 3px;
       background: #2563eb;
-      border-radius: 2px;
-      transition: all 0.3s ease;
+      height: 3.5px;
+      border-radius: 3px;
+      transition: all 0.4s ease;
     }
 
-    /* Mobile Menu */
+    /* Animate Hamburger when active */
+    .hamburger.open span:nth-child(1) {
+      transform: translateY(10px) rotate(45deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: translateY(-10px) rotate(-45deg);
+    }
+
+    /* Responsive Navigation */
     @media (max-width: 768px) {
       .nav-links {
         position: fixed;
-        top: 68px;
+        top: 70px;
         right: 0;
-        background: #fff;
+        width: 260px;
+        height: calc(100vh - 70px);
+        background: white;
         flex-direction: column;
-        width: 230px;
-        border-left: 1.5px solid #2563eb;
-        box-shadow: 0 8px 32px rgb(37 99 235 / 0.15);
-        padding: 1.5rem 2rem;
-        gap: 1.6rem;
-        transition: transform 0.4s ease;
+        padding: 2rem 1.8rem;
+        gap: 1.8rem;
+        border-left: 2.5px solid #2563eb;
+        box-shadow: 0 12px 32px rgb(37 99 235 / 0.15);
         transform: translateX(100%);
-        height: calc(100vh - 68px);
+        transition: transform 0.4s ease;
+        user-select: none;
+        z-index: 13000;
       }
 
       .nav-links.open {
@@ -166,30 +202,48 @@
       color: white;
       position: relative;
       overflow: hidden;
-      padding-top: 5rem;
+      user-select: none;
       padding-bottom: 4rem;
     }
 
-    .hero::before {
-      content: "";
+    /* Animated morphing blob behind profile */
+    .morph-blob {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff10" points="0,1000 1000,200 1000,1000"/></svg>');
+      top: 140px;
+      left: -120px;
+      width: 400px;
+      height: 400px;
+      opacity: 0.18;
+      fill: url(#blobGradient);
+      animation: blobMorph 12s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 7px rgba(99, 102, 241, 0.3));
       z-index: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @keyframes blobMorph {
+      0% {
+        transform: scale(1) translate(0, 0) rotate(0deg);
+      }
+      50% {
+        transform: scale(1.1) translate(15px, -10px) rotate(30deg);
+      }
+      100% {
+        transform: scale(1) translate(0, 0) rotate(0deg);
+      }
     }
 
     .hero-content {
       position: relative;
       z-index: 10;
       display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 4rem;
+      grid-template-columns: 1fr 340px;
+      gap: 4.5rem;
       align-items: center;
-      animation: fadeInUp 1.2s ease forwards;
       opacity: 0;
+      animation: fadeInUp 1.2s forwards;
+      animation-delay: 0.3s;
     }
 
     .hero-content.visible {
@@ -197,131 +251,143 @@
     }
 
     .hero-text h1 {
-      font-size: 4.25rem;
+      font-size: 4.5rem;
       font-weight: 900;
-      line-height: 1.1;
+      line-height: 1.08;
       margin-bottom: 1rem;
-      user-select: none;
-      text-shadow: 0 2px 9px rgba(0, 0, 0, 0.25);
+      user-select: text;
+      letter-spacing: 0.07em;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
     }
 
     .hero-text .subtitle {
-      font-size: 1.7rem;
-      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      margin-bottom: 2.25rem;
       font-weight: 300;
-      opacity: 0.9;
-      letter-spacing: 0.04em;
-      text-shadow: 0 1px 7px rgba(0, 0, 0, 0.2);
+      opacity: 0.92;
+      letter-spacing: 0.1em;
+      text-shadow: 0 1px 7px rgba(0, 0, 0, 0.25);
     }
 
     .hero-text .description {
-      font-size: 1.3rem;
-      max-width: 600px;
+      font-size: 1.34rem;
+      line-height: 1.8;
+      max-width: 620px;
       margin-bottom: 3rem;
-      opacity: 0.85;
-      line-height: 1.75;
+      opacity: 0.9;
+      font-weight: 400;
       user-select: text;
-      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.18);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
     }
 
     .cta-button {
       display: inline-block;
-      padding: 1rem 2.8rem;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2.5px solid rgba(255, 255, 255, 0.35);
-      color: white;
-      border-radius: 50px;
+      padding: 1.12rem 3.2rem;
       font-weight: 700;
-      font-size: 1.15rem;
-      transition: all 0.3s ease;
-      cursor: pointer;
+      font-size: 1.2rem;
+      color: white;
+      background: rgba(255, 255, 255, 0.18);
+      border: 3px solid rgba(255, 255, 255, 0.4);
+      border-radius: 60px;
+      box-shadow:
+        0 5px 20px rgb(255 255 255 / 0.2);
       backdrop-filter: blur(12px);
+      cursor: pointer;
       user-select: none;
-      box-shadow: 0 7px 15px rgba(255, 255, 255, 0.25);
+      transition: all 0.4s ease;
       text-align: center;
-      user-select: none;
     }
 
     .cta-button:hover {
-      background: rgba(255, 255, 255, 0.45);
-      border-color: rgba(255, 255, 255, 0.7);
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 14px 40px rgba(255, 255, 255, 0.45);
+      background: rgba(255, 255, 255, 0.38);
+      border-color: rgba(255, 255, 255, 0.75);
+      transform: scale(1.07) translateY(-3px);
+      box-shadow:
+        0 10px 38px rgba(255, 255, 255, 0.4),
+        0 2px 12px rgba(38, 99, 235, 0.6);
     }
 
     .hero-image {
       position: relative;
       justify-self: center;
       user-select: none;
+      perspective: 600px;
     }
 
-    .profile-bg {
-      position: absolute;
-      width: 360px;
-      height: 360px;
-      border-radius: 50%;
-      background: radial-gradient(ellipse at center, #667eea40 40%, #764ba255 100%);
-      filter: blur(10px);
-      top: -20px;
-      left: -20px;
-      z-index: 1;
-      transition: all 0.4s ease;
-    }
-
+    /* Profile image with slight 3D tilt on hover */
     .profile-image {
       width: 320px;
       height: 320px;
       border-radius: 50%;
       object-fit: cover;
-      border: 6px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 24px 40px rgba(0, 0, 0, 0.28);
-      position: relative;
-      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      border: 6px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 26px 48px rgba(0, 0, 0, 0.34);
+      transform-style: preserve-3d;
+      transition: transform 0.45s ease, box-shadow 0.45s ease;
       cursor: default;
+      user-select: none;
+      background: white;
     }
 
-    .profile-image:hover {
-      transform: scale(1.07);
-      box-shadow: 0 28px 68px rgba(37, 99, 235, 0.55);
+    .hero-image:hover .profile-image {
+      transform: rotateY(10deg) rotateX(5deg) scale(1.08);
+      box-shadow: 0 36px 78px rgba(37, 99, 235, 0.6);
     }
 
-    /* Section Titles */
-    .section-title {
-      font-size: 3.2rem;
-      font-weight: 800;
-      color: #1e293b;
-      margin-bottom: 3rem;
+    /* Section titles */
+    h2.section-title {
+      font-size: 3.4rem;
+      font-weight: 900;
       text-align: center;
+      margin-bottom: 3.5rem;
+      color: #1e293b;
+      letter-spacing: 0.04em;
       position: relative;
       user-select: none;
     }
 
-    .section-title::after {
+    h2.section-title::after {
       position: absolute;
       content: "";
-      width: 70px;
-      height: 5px;
+      width: 80px;
+      height: 6px;
       background: linear-gradient(90deg, #2563eb, #7c3aed);
       border-radius: 3px;
-      bottom: -18px;
+      bottom: -24px;
       left: 50%;
       transform: translateX(-50%);
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.7);
+    }
+
+    /* Smooth fade-in animation */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* About Section */
     .about {
       background: white;
-      padding: 6rem 0 8rem;
+      padding: 6.5rem 0 9rem;
       user-select: none;
     }
 
     .about-content {
+      max-width: 1040px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 3.8rem;
+      grid-template-columns: 1fr 2.4fr;
+      gap: 4.5rem;
       align-items: center;
-      animation: fadeInUp 1.2s ease forwards;
       opacity: 0;
+      animation: fadeInUp 1.2s forwards;
     }
 
     .about-content.visible {
@@ -330,133 +396,168 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
     }
 
     .skill-item {
       background: #f8fafc;
-      border: 1.7px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 1.15rem 1rem;
+      border: 2px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 1.15rem 1.35rem;
       text-align: center;
-      font-weight: 600;
+      font-weight: 700;
       color: #334155;
-      font-size: 1.05rem;
-      user-select: text;
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      font-size: 1.1rem;
+      transition:
+        box-shadow 0.35s ease,
+        transform 0.35s ease;
       cursor: default;
       box-shadow:
-        0 1px 3px rgb(0 0 0 / 0.05),
-        0 1px 2px rgb(0 0 0 / 0.07);
+        0 1px 3px rgb(0 0 0 / 0.07),
+        0 1px 2px rgb(0 0 0 / 0.06);
+      user-select: text;
     }
 
     .skill-item:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px) scale(1.03);
       box-shadow:
-        0 14px 24px rgb(99 102 241 / 0.25),
-        0 10px 20px rgb(99 102 241 / 0.20);
+        0 19px 38px rgb(99 102 241 / 0.35),
+        0 12px 24px rgb(99 102 241 / 0.26);
+      border-color: #4338ca;
     }
 
     .about-text {
-      font-size: 1.15rem;
+      font-size: 1.22rem;
       line-height: 1.85;
       color: #475569;
       font-weight: 400;
       user-select: text;
     }
 
-    /* Education Section */
+    /* Section Dividers with SVG and wave shape */
+    .section-divider {
+      position: relative;
+      width: 100%;
+      height: 70px;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .section-divider svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Timeline (Education) */
+
     .education {
       background: #f8fafc;
-      padding: 6rem 0 8rem;
+      padding: 6.5rem 0 9rem;
       user-select: none;
     }
 
     .timeline {
-      max-width: 820px;
+      max-width: 850px;
       margin: 0 auto;
       position: relative;
-      animation: fadeInUp 1.2s ease forwards;
       opacity: 0;
+      animation: fadeInUp 1.2s forwards;
     }
 
     .timeline.visible {
       opacity: 1;
     }
 
+    /* Vertical line */
     .timeline::before {
       content: "";
       position: absolute;
       left: 50%;
       top: 0;
       bottom: 0;
-      width: 3.5px;
+      width: 5px;
       background: linear-gradient(180deg, #2563eb, #7c3aed);
+      border-radius: 3px;
+      box-shadow: 0 0 14px rgba(37, 99, 235, 0.34);
       transform: translateX(-50%);
-      border-radius: 2px;
-      box-shadow: 0 0 12px rgba(37, 99, 235, 0.45);
+      z-index: 1;
     }
 
+    /* Individual timeline item */
     .timeline-item {
       position: relative;
-      margin-bottom: 3.6rem;
+      margin-bottom: 4.2rem;
       width: 45%;
-      transition: transform 0.4s ease;
+      cursor: default;
+      transition: transform 0.38s ease;
+      border-radius: 14px;
+      padding: 1.8rem 2.2rem;
+      box-shadow:
+        0 12px 28px rgb(0 0 0 / 0.08),
+        0 5px 15px rgb(37 99 235 / 0.1);
+      background: white;
+      z-index: 2;
+      user-select: text;
     }
 
+    /* Odd left, even right positioning */
     .timeline-item:nth-child(odd) {
       left: 0;
       text-align: right;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-right: 55px;
     }
 
     .timeline-item:nth-child(even) {
       left: 55%;
       text-align: left;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-left: 55px;
     }
 
+    /* Timeline item hover lift */
     .timeline-item:hover {
-      transform: translateY(-8px);
-    }
-
-    .timeline-content {
-      background: white;
-      padding: 2rem 2.4rem;
-      border-radius: 14px;
+      transform: translateY(-10px);
       box-shadow:
-        0 8px 32px rgb(0 0 0 / 0.10),
-        0 4px 10px rgb(37 99 235 / 0.15);
-      position: relative;
-      user-select: text;
+        0 26px 50px rgb(37 99 235 / 0.35),
+        0 10px 30px rgb(37 99 235 / 0.25);
     }
 
     .timeline-date {
       color: #2563eb;
       font-weight: 700;
       font-size: 0.95rem;
-      margin-bottom: 0.55rem;
-      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.06em;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       user-select: none;
     }
 
     .timeline-title {
-      font-size: 1.38rem;
-      font-weight: 800;
-      margin-bottom: 0.7rem;
+      font-weight: 900;
+      font-size: 1.42rem;
       color: #1e293b;
+      margin-bottom: 0.7rem;
+      user-select: text;
     }
 
     .timeline-subtitle {
-      color: #64748b;
+      color: #4a5568;
       font-weight: 600;
+      font-size: 1rem;
       margin-bottom: 1rem;
-      letter-spacing: 0.03em;
+      letter-spacing: 0.04em;
+      user-select: text;
     }
 
-    /* Projects Section */
+    /* Research Projects Section */
     .projects {
       background: white;
-      padding: 6rem 0 8rem;
+      padding: 6.5rem 0 9rem;
       user-select: none;
     }
 
@@ -464,83 +565,113 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2.8rem;
-      margin-top: 3rem;
-      animation: fadeInUp 1.2s ease forwards;
+      margin-top: 3.5rem;
       opacity: 0;
+      animation: fadeInUp 1.2s forwards;
     }
 
     .projects-grid.visible {
       opacity: 1;
     }
 
+    /* Flip card container */
     .project-card {
-      background: white;
-      border-radius: 16px;
-      overflow: hidden;
+      perspective: 1100px;
+      cursor: pointer;
+      outline-offset: 4px;
+      outline-color: transparent;
+      border-radius: 18px;
       box-shadow:
-        0 5px 18px rgb(0 0 0 / 0.07);
-      border: 1.5px solid #e2e8f0;
-      transition: all 0.35s ease;
-      cursor: default;
-      user-select: text;
-    }
-
-    .project-card:hover {
-      transform: translateY(-12px);
-      box-shadow:
-        0 20px 40px rgb(0 0 0 / 0.15);
-    }
-
-    .project-image {
-      height: 200px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.25rem;
-      font-weight: 700;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      padding: 0 1.4rem;
+        0 7px 28px rgb(0 0 0 / 0.1);
+      transition: box-shadow 0.35s ease;
       user-select: none;
+      width: 100%;
+      height: 280px;
+      position: relative;
+    }
+
+    .project-card:focus-visible {
+      outline: 3px solid #2563ebaa;
+      outline-offset: 6px;
+    }
+
+    .project-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.68s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow:
+        0 10px 48px rgb(0 0 0 / 0.09);
+    }
+
+    .project-card:hover .project-inner,
+    .project-card:focus .project-inner {
+      transform: rotateY(180deg);
+      box-shadow:
+        0 24px 98px rgb(37 99 235 / 0.38);
+    }
+
+    /* Front face */
+    .project-front,
+    .project-back {
+      width: 100%;
+      height: 100%;
+      border-radius: 18px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: white;
+      user-select: none;
+      padding: 1.8rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      box-sizing: border-box;
+      text-align: center;
+      backface-visibility: hidden;
+      cursor: default;
+    }
+
+    .project-front {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-weight: 700;
+      font-size: 1.25rem;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
       letter-spacing: 0.06em;
-      border-top-left-radius: 16px;
-      border-top-right-radius: 16px;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    }
-
-    .project-content {
-      padding: 1.75rem 1.6rem 2rem;
-    }
-
-    .project-title {
-      font-size: 1.35rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      color: #1e293b;
       user-select: text;
+      border: 0;
     }
 
-    .project-description {
-      color: #64748b;
-      line-height: 1.65;
+    /* Back face */
+    .project-back {
+      background: linear-gradient(120deg, #3b82f6, #7c3aed);
+      transform: rotateY(180deg);
+      box-shadow: inset 0 0 28px rgb(0 0 0 / 0.2);
+      font-weight: 500;
       font-size: 1rem;
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+      line-height: 1.55;
       user-select: text;
+      letter-spacing: 0.03em;
+      color: #dbdbdb;
+      padding-top: 2.2rem;
     }
 
     /* Experience Section */
     .experience {
       background: #f8fafc;
-      padding: 6rem 0 8rem;
+      padding: 6.5rem 0 9rem;
       user-select: none;
     }
 
     .experience-list {
-      max-width: 800px;
+      max-width: 840px;
       margin: 0 auto;
-      animation: fadeInUp 1.2s ease forwards;
       opacity: 0;
+      animation: fadeInUp 1.2s forwards;
     }
 
     .experience-list.visible {
@@ -549,60 +680,70 @@
 
     .experience-item {
       background: white;
-      padding: 2.3rem 2.4rem;
+      border-left: 6px solid #2563eb;
       border-radius: 14px;
-      margin-bottom: 2.5rem;
+      padding: 2.4rem 2.8rem;
+      margin-bottom: 2.7rem;
       box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.09);
-      border-left: 5px solid #2563eb;
-      transition: transform 0.3s ease;
+        0 14px 30px rgba(0, 0, 0, 0.09);
+      transition: box-shadow 0.35s ease, transform 0.35s ease;
       cursor: default;
       user-select: text;
     }
 
     .experience-item:hover {
-      transform: translateX(8px);
+      transform: translateX(10px);
       box-shadow:
-        0 20px 38px rgba(37, 99, 235, 0.25);
+        0 25px 48px rgba(37, 99, 235, 0.28);
     }
 
     .experience-title {
-      font-size: 1.35rem;
-      font-weight: 800;
+      font-size: 1.38rem;
+      font-weight: 900;
       color: #1e293b;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.7rem;
+      letter-spacing: 0.04em;
       user-select: text;
     }
 
     .experience-duration {
       color: #2563eb;
       font-weight: 700;
-      margin-bottom: 1.4rem;
+      margin-bottom: 1.6rem;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       user-select: none;
+      letter-spacing: 0.06em;
     }
 
     .experience-description {
       color: #475569;
+      font-size: 1.1rem;
       line-height: 1.9;
-      font-size: 1.05rem;
+      letter-spacing: 0.03em;
+      user-select: text;
     }
 
     /* Publications Section */
     #publications {
       background: white;
-      padding: 6rem 0 6rem;
+      padding: 6.5rem 0 9rem;
+    }
+
+    #publications h2 {
       user-select: none;
     }
 
     #publications ol {
-      max-width: 760px;
-      margin: 0 auto;
-      padding-left: 1.7rem;
-      font-size: 1.1rem;
-      line-height: 1.9;
+      max-width: 780px;
+      margin: 1rem auto 0;
+      padding-left: 1.6rem;
+      font-size: 1.12rem;
+      line-height: 1.85;
       color: #374151;
-      animation: fadeInUp 1.2s ease forwards;
+      user-select: text;
       opacity: 0;
+      animation: fadeInUp 1.2s forwards;
+      letter-spacing: 0.02em;
     }
 
     #publications ol.visible {
@@ -610,11 +751,10 @@
     }
 
     #publications li {
-      margin-bottom: 1.6rem;
+      margin-bottom: 1.4rem;
     }
 
     #publications a {
-      text-decoration: none;
       font-weight: 700;
       color: #1e40af;
       transition: color 0.3s ease;
@@ -622,207 +762,338 @@
 
     #publications a:hover {
       color: #4338ca;
+      text-decoration: underline;
     }
 
     /* Contact Section */
     .contact {
-      padding: 6rem 0 8rem;
       background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+      padding: 6.5rem 0 9rem;
       color: white;
       user-select: none;
     }
 
     .contact-content {
-      text-align: center;
-      max-width: 600px;
+      max-width: 620px;
       margin: 0 auto;
-      animation: fadeInUp 1.3s ease forwards;
+      text-align: center;
       opacity: 0;
+      animation: fadeInUp 1.3s forwards;
     }
 
     .contact-content.visible {
       opacity: 1;
     }
 
-    .contact .section-title {
-      color: white;
+    .contact-content h2 {
+      font-weight: 900;
+      font-size: 3rem;
       margin-bottom: 1rem;
-      letter-spacing: 0.05em;
-      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+      letter-spacing: 0.1em;
+      user-select: none;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.75);
     }
 
-    .contact p {
-      font-size: 1.22rem;
-      font-weight: 500;
-      opacity: 0.95;
+    .contact-content p {
+      font-weight: 600;
+      font-size: 1.25rem;
       margin-bottom: 3rem;
-      line-height: 1.65;
+      opacity: 0.95;
+      line-height: 1.75;
       user-select: text;
     }
 
     .contact-info {
       display: flex;
       justify-content: center;
-      gap: 3.1rem;
+      gap: 3.8rem;
       flex-wrap: wrap;
+      font-size: 1.25rem;
+      font-weight: 600;
+      user-select: text;
     }
 
     .contact-item {
       display: flex;
       align-items: center;
-      gap: 0.7rem;
-      font-size: 1.15rem;
-      user-select: text;
+      gap: 0.8rem;
       cursor: default;
-      max-width: 210px;
-      transition: color 0.25s ease;
+      color: #a5b4fc;
+      transition: color 0.3s ease;
     }
 
-    .contact-item a:hover {
+    .contact-item:hover {
       color: #60a5fa;
-      text-decoration: underline;
-      cursor: pointer;
     }
 
     .contact-item i {
-      font-size: 1.4rem;
-      color: #60a5fa;
-      min-width: 24px;
-      min-height: 24px;
+      font-size: 1.5rem;
+      min-width: 26px;
       user-select: none;
     }
 
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .contact-item a {
+      user-select: text;
     }
 
-    /* Scroll progress bar */
-    #progressBar {
-      height: 3.5px;
-      background: linear-gradient(to right, #2563eb, #7c3aed);
+    /* Light/Dark theme toggle button */
+    #themeToggle {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      z-index: 12000;
-      border-radius: 0 0 6px 6px;
-      box-shadow: 0 2px 8px rgb(37 99 235 / 0.4);
-      transition: width 0.3s ease;
+      bottom: 26px;
+      right: 26px;
+      background: #2563eb;
+      border-radius: 50%;
+      width: 52px;
+      height: 52px;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      z-index: 13500;
+      box-shadow:
+        0 8px 22px rgba(37, 99, 235, 0.55);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: background-color 0.4s ease;
+      user-select: none;
     }
 
-    /* Responsive Design */
-    @media (max-width: 768px) {
-      .hero {
-        padding-top: 6rem;
-        padding-bottom: 3rem;
-      }
+    #themeToggle i {
+      color: white;
+      font-size: 1.45rem;
+      pointer-events: none;
+      user-select: none;
+      transition: transform 0.4s ease;
+    }
 
+    #themeToggle:hover {
+      background: #4338ca;
+    }
+
+    /* Dark Theme Styles */
+    body.dark-theme {
+      background-color: #121212;
+      color: #e0e6f2;
+    }
+
+    body.dark-theme header {
+      background: rgba(22, 22, 22, 0.95);
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.8);
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    body.dark-theme .nav-links a,
+    body.dark-theme .nav-links a:hover,
+    body.dark-theme .nav-links a.active {
+      color: #a5b4fc;
+    }
+
+    body.dark-theme .nav-links a::after {
+      background: #818cf8;
+    }
+
+    body.dark-theme .hero {
+      background: linear-gradient(120deg, #3b3b7a, #5b3f7f);
+    }
+
+    body.dark-theme .hero-text h1,
+    body.dark-theme .hero-text .subtitle,
+    body.dark-theme .hero-text .description,
+    body.dark-theme .cta-button {
+      text-shadow: 0 1px 6px rgba(0, 0, 0, 0.9);
+      color: #e0e6f2;
+    }
+
+    body.dark-theme .cta-button {
+      background: rgba(66, 66, 141, 0.26);
+      border-color: rgba(66, 66, 141, 0.42);
+      box-shadow: 0 8px 20px rgb(66 66 141 / 0.3);
+    }
+
+    body.dark-theme .cta-button:hover {
+      background: rgba(123, 123, 225, 0.48);
+      border-color: rgba(123, 123, 225, 0.72);
+      box-shadow: 0 14px 52px rgb(123 123 225 / 0.44);
+    }
+
+    body.dark-theme .profile-image {
+      box-shadow: 0 28px 56px rgba(66, 66, 141, 0.65);
+      border-color: rgba(123, 123, 225, 0.4);
+      background: #1e1e40;
+    }
+
+    body.dark-theme .skills-grid .skill-item {
+      background: #222244;
+      border-color: #363662;
+      color: #b8bef8;
+      box-shadow:
+        0 2px 8px rgba(66, 66, 141, 0.15);
+    }
+
+    body.dark-theme .skills-grid .skill-item:hover {
+      box-shadow:
+        0 20px 38px rgb(123 123 225 / 0.55),
+        0 14px 28px rgb(123 123 225 / 0.32);
+      border-color: #7c3aed;
+      color: #e0e6f2;
+    }
+
+    body.dark-theme .timeline-item {
+      background: #222244;
+      box-shadow:
+        0 12px 28px rgba(0, 0, 0, 0.25);
+      color: #d1d4f9;
+    }
+
+    body.dark-theme .timeline-date {
+      color: #7c3aed;
+    }
+
+    body.dark-theme .timeline-subtitle {
+      color: #94a3b8;
+    }
+
+    body.dark-theme .projects-grid .project-front {
+      background: linear-gradient(135deg, #5b5b9d, #704d9f);
+      color: #e0e6f2;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    body.dark-theme .projects-grid .project-back {
+      background: linear-gradient(120deg, #3b3b7a, #5b3f7f);
+      color: #d0d4fc;
+      box-shadow: inset 0 0 28px rgba(0, 0, 0, 0.5);
+    }
+
+    body.dark-theme .experience-item {
+      background: #222244;
+      color: #bcc2ff;
+      border-color: #7c3aed;
+      box-shadow: 0 18px 40px rgba(123, 89, 232, 0.4);
+    }
+
+    body.dark-theme #publications a {
+      color: #aabbff;
+    }
+
+    body.dark-theme #publications a:hover {
+      color: #8855ff;
+    }
+
+    body.dark-theme .contact {
+      background: linear-gradient(135deg, #121a37 0%, #1f314f 100%);
+    }
+
+    body.dark-theme .contact-content p {
+      color: #c9d1fecc;
+    }
+
+    body.dark-theme .contact-item {
+      color: #aab8ffdd;
+    }
+
+    body.dark-theme .contact-item:hover {
+      color: #7c3aed;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 900px) {
       .hero-content {
         grid-template-columns: 1fr;
-        gap: 2rem;
         text-align: center;
       }
 
-      .hero-text h1 {
-        font-size: 2.8rem;
-      }
-
-      .hero-text .subtitle {
-        font-size: 1.3rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .hero-text .description {
-        font-size: 1.1rem;
-        margin-bottom: 2.5rem;
-      }
-
-      .profile-bg {
-        width: 250px;
-        height: 250px;
-        top: -12px;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        filter: blur(9px);
-      }
-
-      .profile-image {
-        width: 230px;
-        height: 230px;
-        margin: 0 auto;
+      .hero-image {
+        margin: 2rem auto 0 auto;
       }
 
       .about-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2rem;
+        grid-template-columns: 1fr !important;
+        text-align: center !important;
+        gap: 2.2rem;
+        max-width: 90%;
+        margin: 0 auto;
+      }
+
+      .timeline-item:nth-child(odd), .timeline-item:nth-child(even) {
+        left: 20px !important;
+        width: calc(100% - 40px);
+        text-align: left !important;
+        margin: 0 auto 3.6rem auto;
+        border-radius: 14px;
       }
 
       .timeline::before {
-        left: 22px !important;
+        left: 20px !important;
       }
 
-      .timeline-item {
-        width: calc(100% - 50px);
-        left: 40px !important;
-        text-align: left !important;
-        margin-bottom: 4rem;
+      .project-card {
+        height: 320px;
       }
 
-      .experience-list,
-      #publications ol,
-      .projects-grid,
-      .contact-content {
-        padding: 0 1.5rem;
+      .projects-grid {
+        gap: 3rem;
       }
 
-      .contact-info {
-        flex-direction: column;
-        gap: 1rem;
+      .experience-item {
+        margin: 0 auto 2.7rem auto;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .nav-links {
+        width: 240px !important;
       }
 
-      .section-title {
-        font-size: 2.5rem;
+      .about-content {
+        padding: 0 1rem;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
       }
     }
   </style>
+
 </head>
 
 <body>
   <div id="progressBar"></div>
 
   <header>
-    <nav>
-      <a href="#home" class="logo" aria-label="Jaisingh Pal home link">Jaisingh Pal</a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#home" class="active">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#contact">Contact</a></li>
+    <nav role="navigation" aria-label="Primary Navigation">
+      <a href="#home" class="logo" aria-label="Jaisingh Pal homepage">Jaisingh Pal</a>
+      <ul class="nav-links" id="navLinks" role="menu">
+        <li><a href="#home" role="menuitem" class="active" tabindex="0">Home</a></li>
+        <li><a href="#about" role="menuitem" tabindex="0">About</a></li>
+        <li><a href="#education" role="menuitem" tabindex="0">Education</a></li>
+        <li><a href="#experience" role="menuitem" tabindex="0">Experience</a></li>
+        <li><a href="#projects" role="menuitem" tabindex="0">Projects</a></li>
+        <li><a href="#publications" role="menuitem" tabindex="0">Publications</a></li>
+        <li><a href="#contact" role="menuitem" tabindex="0">Contact</a></li>
       </ul>
-      <div class="hamburger" id="hamburgerBtn" aria-label="Toggle navigation menu" role="button" tabindex="0">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+
+      <button aria-label="Toggle menu" id="hamburgerBtn" class="hamburger" aria-expanded="false"
+        aria-controls="navLinks" tabindex="0">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </header>
 
-  <section id="home" class="hero" tabindex="-1">
+  <section id="home" class="hero" tabindex="-1" aria-label="Home section">
     <div class="container">
+      <svg class="morph-blob" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="blobGradient" cx="0.5" cy="0.5" r="0.8">
+            <stop offset="0%" stop-color="#667eea" />
+            <stop offset="100%" stop-color="#764ba2" />
+          </radialGradient>
+        </defs>
+        <path fill="url(#blobGradient)"
+          d="M329.1,283.7Q303,327,257,343Q211,359,180.1,337.5Q149.3,316,126.3,280.5Q103.3,245,106.3,194.9Q109.3,144.8,153.9,109.4Q198.5,74,250.5,90.9Q302.6,107.8,323.5,153.6Q344.4,199.5,329.1,283.7Z" />
+      </svg>
+
       <div class="hero-content">
         <div class="hero-text">
           <h1>Jaisingh Pal</h1>
@@ -832,30 +1103,31 @@
             characterization, and analog circuit design. Passionate about advancing semiconductor technology through
             innovative research and practical applications.
           </p>
-          <a href="#about" class="cta-button" aria-label="Learn more about Jaisingh Pal">Learn More</a>
+          <a href="#about" class="cta-button" aria-describedby="ctaLabel" role="button" tabindex="0">Learn More</a>
+          <span id="ctaLabel" class="sr-only">Learn more about Jaisingh Pal</span>
         </div>
-        <div class="hero-image" aria-hidden="true">
-          <div class="profile-bg"></div>
-          <img src="jaisingh.png" class="profile-image" alt="Jaisingh Pal Portrait" />
+
+        <div class="hero-image" aria-hidden="true" tabindex="-1">
+          <img src="jaisingh.png" alt="Portrait of Jaisingh Pal" class="profile-image" />
         </div>
       </div>
     </div>
   </section>
 
-  <section id="about" class="about" tabindex="-1">
+  <section id="about" class="about" tabindex="-1" aria-label="About Me section">
     <div class="container">
       <h2 class="section-title fade-in">About Me</h2>
       <div class="about-content fade-in">
-        <div class="skills-grid">
-          <div class="skill-item">Sentaurus TCAD</div>
-          <div class="skill-item">Cadence Virtuoso</div>
-          <div class="skill-item">Device Characterization</div>
-          <div class="skill-item">Analog Circuit Design</div>
-          <div class="skill-item">EasyExpert</div>
-          <div class="skill-item">Velox</div>
-          <div class="skill-item">MATLAB</div>
+        <div class="skills-grid" aria-label="Skills and Expertise">
+          <div class="skill-item" tabindex="0">Sentaurus TCAD</div>
+          <div class="skill-item" tabindex="0">Cadence Virtuoso</div>
+          <div class="skill-item" tabindex="0">Device Characterization</div>
+          <div class="skill-item" tabindex="0">Analog Circuit Design</div>
+          <div class="skill-item" tabindex="0">EasyExpert</div>
+          <div class="skill-item" tabindex="0">Velox</div>
+          <div class="skill-item" tabindex="0">MATLAB</div>
         </div>
-        <div class="about-text">
+        <div class="about-text" tabindex="0">
           <p>
             As a Ph.D candidate at IIT Gandhinagar specializing in Semiconductor Devices, I combine theoretical knowledge
             with practical expertise in advanced semiconductor technologies. My research focuses on cutting-edge device
@@ -871,39 +1143,45 @@
     </div>
   </section>
 
-  <section id="education" class="education" tabindex="-1">
+  <div class="section-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path fill="#f8fafc" d="M0,32L1440,60V0H0Z"></path>
+    </svg>
+  </div>
+
+  <section id="education" class="education" tabindex="-1" aria-label="Education section">
     <div class="container">
       <h2 class="section-title fade-in">Education</h2>
-      <div class="timeline fade-in">
-        <div class="timeline-item">
+      <div class="timeline fade-in" role="list">
+        <div class="timeline-item" role="listitem" tabindex="0">
           <div class="timeline-content">
             <div class="timeline-date">Pursuing</div>
             <div class="timeline-title">Ph.D in Semiconductor Devices</div>
             <div class="timeline-subtitle">IIT Gandhinagar</div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item" role="listitem" tabindex="0">
           <div class="timeline-content">
             <div class="timeline-date">June 2022</div>
             <div class="timeline-title">B.Tech Electronics and Telecommunication</div>
             <div class="timeline-subtitle">VIIT Pune</div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item" role="listitem" tabindex="0">
           <div class="timeline-content">
             <div class="timeline-date">May 2019</div>
             <div class="timeline-title">Diploma Electronics and Telecommunication</div>
             <div class="timeline-subtitle">Sandip Polytechnic</div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item" role="listitem" tabindex="0">
           <div class="timeline-content">
             <div class="timeline-date">2017</div>
             <div class="timeline-title">12th(Science)</div>
             <div class="timeline-subtitle">Bhonsala Military College</div>
           </div>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item" role="listitem" tabindex="0">
           <div class="timeline-content">
             <div class="timeline-date">2015</div>
             <div class="timeline-title">10th(SSC)</div>
@@ -914,110 +1192,131 @@
     </div>
   </section>
 
-  <section id="experience" class="experience" tabindex="-1">
+  <div class="section-divider" aria-hidden="true">
+    <svg viewBox="0 0 1440 70" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path fill="#ffffff" d="M0,30L1440,70V0H0Z"></path>
+    </svg>
+  </div>
+
+  <section id="experience" class="experience" tabindex="-1" aria-label="Experience section">
     <div class="container">
       <h2 class="section-title fade-in">Experience</h2>
-      <div class="experience-list fade-in">
-        <div class="experience-item">
-          <div class="experience-title">Lab Admin - Wafer Characterization Lab</div>
-          <div class="experience-duration">July 2022 - Present</div>
-          <div class="experience-description">
+      <div class="experience-list fade-in" role="list">
+        <article class="experience-item" role="listitem" tabindex="0">
+          <h3 class="experience-title">Lab Admin - Wafer Characterization Lab</h3>
+          <time class="experience-duration" aria-label="Duration July 2022 to Present">July 2022 - Present</time>
+          <p class="experience-description">
             Managing a state-of-the-art wafer characterization laboratory equipped with world-class technology. Overseeing
             comprehensive characterization processes using high-quality wafers and SMU (Source Measure Unit) for accurate
             measurements and reliable results.
-          </div>
-        </div>
-        <div class="experience-item">
-          <div class="experience-title">Research and Teaching Assistant - FP 602</div>
-          <div class="experience-duration">July 2024 - Dec 2024</div>
-          <div class="experience-description">
+          </p>
+        </article>
+        <article class="experience-item" role="listitem" tabindex="0">
+          <h3 class="experience-title">Research and Teaching Assistant - FP 602</h3>
+          <time class="experience-duration" aria-label="Duration July 2024 to Dec 2024">July 2024 - Dec 2024</time>
+          <p class="experience-description">
             Supporting course instruction by leading tutorials, grading assignments, and facilitating student
             understanding. Creating a positive learning environment through effective communication and administrative
             support.
-          </div>
-        </div>
-        <div class="experience-item">
-          <div class="experience-title">Research and Teaching Assistant - ES 116</div>
-          <div class="experience-duration">Jan 2024 - May 2024</div>
-          <div class="experience-description">
+          </p>
+        </article>
+        <article class="experience-item" role="listitem" tabindex="0">
+          <h3 class="experience-title">Research and Teaching Assistant - ES 116</h3>
+          <time class="experience-duration" aria-label="Duration Jan 2024 to May 2024">Jan 2024 - May 2024</time>
+          <p class="experience-description">
             Conducted tutorials, assisted with laboratory sessions and projects, and ensured fair and thorough grading.
             Provided comprehensive support to enhance student learning experience.
-          </div>
-        </div>
-        <div class="experience-item">
-          <div class="experience-title">Project Intern</div>
-          <div class="experience-duration">May - Nov 2021</div>
-          <div class="experience-description">
+          </p>
+        </article>
+        <article class="experience-item" role="listitem" tabindex="0">
+          <h3 class="experience-title">Project Intern - SARVAA Research and Innovation</h3>
+          <time class="experience-duration" aria-label="Duration May to Nov 2021">May - Nov 2021</time>
+          <p class="experience-description">
             Contributed to innovative research projects in semiconductor technology and device development.
-          </div>
-        </div>
+          </p>
+        </article>
       </div>
     </div>
   </section>
 
-  <section id="projects" class="projects" tabindex="-1">
+  <div class="section-divider" aria-hidden="true" style="background: #f8fafc;">
+    <svg viewBox="0 0 1440 50" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path fill="#ffffff" d="M0,0L1440,50V0H0Z"></path>
+    </svg>
+  </div>
+
+  <section id="projects" class="projects" tabindex="-1" aria-label="Research Projects section">
     <div class="container">
       <h2 class="section-title fade-in">Research Projects</h2>
-      <div class="projects-grid fade-in">
-        <div class="project-card" tabindex="0">
-          <div class="project-image">2D TCAD HBT Simulation</div>
-          <div class="project-content">
-            <div class="project-title">2D Simulation of Heterostructure Bipolar Transistor</div>
-            <div class="project-description">
-              Advanced TCAD simulation of HBT structures incorporating heterojunctions between different semiconductor
-              materials. Focus on high-frequency and high-speed applications with superior performance characteristics
-              compared to traditional BJTs.
+      <div class="projects-grid fade-in" role="list">
+        <!-- Project 1 Flip Card -->
+        <div class="project-card" tabindex="0" role="listitem" aria-label="2D Simulation of Heterostructure Bipolar Transistor project">
+          <div class="project-inner">
+            <div class="project-front" aria-hidden="false">
+              2D TCAD HBT Simulation
+            </div>
+            <div class="project-back" aria-hidden="true">
+              Advanced TCAD simulation of HBT structures incorporating heterojunctions between different semiconductor materials. Focus on high-frequency and high-speed applications with superior performance characteristics compared to traditional BJTs.
             </div>
           </div>
         </div>
-        <div class="project-card" tabindex="0">
-          <div class="project-image">3D CFET Structure</div>
-          <div class="project-content">
-            <div class="project-title">3D Simulation of Complementary FET</div>
-            <div class="project-description">
-              Comprehensive study of CFETs integrating n-type and p-type transistors on single substrates. Enhanced power
-              efficiency, reduced heat dissipation, and potential for 3D integration addressing miniaturization challenges.
+
+        <!-- Project 2 Flip Card -->
+        <div class="project-card" tabindex="0" role="listitem" aria-label="3D Simulation of Complementary FET project">
+          <div class="project-inner">
+            <div class="project-front" aria-hidden="false">
+              3D CFET Structure
+            </div>
+            <div class="project-back" aria-hidden="true">
+              Comprehensive study of CFETs integrating n-type and p-type transistors on single substrates. Enhanced power efficiency, reduced heat dissipation, and potential for 3D integration addressing miniaturization challenges.
             </div>
           </div>
         </div>
-        <div class="project-card" tabindex="0">
-          <div class="project-image">Radiation-Hardened SRAM</div>
-          <div class="project-content">
-            <div class="project-title">Radiation-Hardened 14T SRAM Bitcell</div>
-            <div class="project-description">
-              Speed and power optimized design for space applications. Implementation of robust design methodologies,
-              hardened materials, and redundancy techniques to enhance radiation tolerance of semiconductor devices.
+
+        <!-- Project 3 Flip Card -->
+        <div class="project-card" tabindex="0" role="listitem" aria-label="Radiation-Hardened 14T SRAM Bitcell project">
+          <div class="project-inner">
+            <div class="project-front" aria-hidden="false">
+              Radiation-Hardened SRAM
+            </div>
+            <div class="project-back" aria-hidden="true">
+              Speed and power optimized design for space applications. Implementation of robust design methodologies, hardened materials, and redundancy techniques to enhance radiation tolerance of semiconductor devices.
             </div>
           </div>
         </div>
-        <div class="project-card" tabindex="0">
-          <div class="project-image">Analog Circuit Design</div>
-          <div class="project-content">
-            <div class="project-title">Advanced Analog Circuit Design</div>
-            <div class="project-description">
-              Low-power 2-stage OP-AMP design in SCL 180nm technology. Band-gap reference circuit with temperature
-              compensation and configurable amplifier analysis including CS-CS cascade, telescopic cascode, and gain-boosted
-              configurations.
+
+        <!-- Project 4 Flip Card -->
+        <div class="project-card" tabindex="0" role="listitem" aria-label="Advanced Analog Circuit Design project">
+          <div class="project-inner">
+            <div class="project-front" aria-hidden="false">
+              Analog Circuit Design
+            </div>
+            <div class="project-back" aria-hidden="true">
+              Low-power 2-stage OP-AMP design in SCL 180nm technology. Band-gap reference circuit with temperature compensation and configurable amplifier analysis including CS-CS cascade, telescopic cascode, and gain-boosted configurations.
             </div>
           </div>
         </div>
-        <div class="project-card" tabindex="0">
-          <div class="project-image">3D NAND Flash</div>
-          <div class="project-content">
-            <div class="project-title">3D NAND Flash Memory Research</div>
-            <div class="project-description">
-              Comprehensive review of vertical stacking architecture for higher density storage. Analysis of improved
-              performance, enhanced endurance and reliability features, and future trends in 3D NAND technology.
+
+        <!-- Project 5 Flip Card -->
+        <div class="project-card" tabindex="0" role="listitem" aria-label="3D NAND Flash Memory Research project">
+          <div class="project-inner">
+            <div class="project-front" aria-hidden="false">
+              3D NAND Flash
+            </div>
+            <div class="project-back" aria-hidden="true">
+              Comprehensive review of vertical stacking architecture for higher density storage. Analysis of improved performance, enhanced endurance and reliability features, and future trends in 3D NAND technology.
             </div>
           </div>
         </div>
-        <div class="project-card" tabindex="0">
-          <div class="project-image">SiGe HBT Research</div>
-          <div class="project-content">
-            <div class="project-title">Silicon-Germanium HBT Analysis</div>
-            <div class="project-description">
-              In-depth study of SiGe HBT fabrication techniques, device physics, and performance metrics. Focus on
-              high-frequency applications in communication systems and exploration of future research directions.
+
+        <!-- Project 6 Flip Card -->
+        <div class="project-card" tabindex="0" role="listitem" aria-label="Silicon-Germanium HBT Analysis project">
+          <div class="project-inner">
+            <div class="project-front" aria-hidden="false">
+              SiGe HBT Research
+            </div>
+            <div class="project-back" aria-hidden="true">
+              In-depth study of SiGe HBT fabrication techniques, device physics, and performance metrics. Focus on high-frequency applications in communication systems and exploration of future research directions.
             </div>
           </div>
         </div>
@@ -1025,150 +1324,181 @@
     </div>
   </section>
 
-  <section id="publications" tabindex="-1">
+  <section id="publications" tabindex="-1" aria-label="Publications section">
     <div class="container">
       <h2 class="section-title fade-in">Publications</h2>
-      <ol class="fade-in">
-        <li>
-          <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10511766" target="_blank"
-            rel="noopener noreferrer"
-            >Sharma, Prateek, <strong>Jaisingh Pal</strong>, and Sandip Lashkare. "Bit-wise Logical Operations using
-            Capacitor-less Silicon-on-Insulator MOSFET for In-memory Computing." 2024 8th IEEE Electron Devices Technology
-            & Manufacturing Conference (EDTM). IEEE, 2024.</a
-          >
+      <ol class="fade-in" role="list">
+        <li tabindex="0">
+          <a href="https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10511766" target="_blank" rel="noopener noreferrer">
+            Sharma, Prateek, <strong>Jaisingh Pal</strong>, and Sandip Lashkare. "Bit-wise Logical Operations using Capacitor-less Silicon-on-Insulator MOSFET for In-memory Computing." 2024 8th IEEE Electron Devices Technology & Manufacturing Conference (EDTM). IEEE, 2024.
+          </a>
         </li>
-        <li>
-          <a href="https://link.springer.com/article/10.1007/s00542-019-04610-2" target="_blank" rel="noopener noreferrer"
-            >A. Singh, <strong>Jaisingh Pal</strong>, Om Maheshwari, and N. Mohapatra. “Comprehensive Study of Parasitic
-            Capacitance in CFETs: An Analytical Perspective”, IEEE Transactions on Electron Devices, 2025, DOI:
-            10.1109/TED.2025.3585907.</a
-          >
+        <li tabindex="0">
+          <a href="https://link.springer.com/article/10.1007/s00542-019-04610-2" target="_blank" rel="noopener noreferrer">
+            A. Singh, <strong>Jaisingh Pal</strong>, Om Maheshwari, and N. Mohapatra. “Comprehensive Study of Parasitic Capacitance in CFETs: An Analytical Perspective”, IEEE Transactions on Electron Devices, 2025, DOI: 10.1109/TED.2025.3585907.
+          </a>
         </li>
       </ol>
     </div>
   </section>
 
-  <section id="contact" class="contact" tabindex="-1">
+  <section id="contact" class="contact" tabindex="-1" aria-label="Contact section">
     <div class="container">
       <div class="contact-content fade-in">
-        <h2 class="section-title">Get In Touch</h2>
+        <h2>Get In Touch</h2>
         <p>
           Interested in collaboration, research opportunities, or discussing semiconductor innovations? I'd love to
           connect with fellow researchers and industry professionals.
         </p>
         <div class="contact-info">
-          <div class="contact-item">
+          <div class="contact-item" tabindex="0">
             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
             <a href="mailto:harishkumarjaisingh@iitgn.ac.in" aria-label="Send email to Jaisingh Pal">harishkumarjaisingh@iitgn.ac.in</a>
           </div>
-          <div class="contact-item">
+          <div class="contact-item" tabindex="0">
             <i class="fa-solid fa-phone" aria-hidden="true"></i>
             <a href="tel:+918805836345" aria-label="Call Jaisingh Pal">+91 8805836345</a>
           </div>
-          <div class="contact-item">
+          <div class="contact-item" tabindex="0">
             <i class="fa-brands fa-linkedin" aria-hidden="true"></i>
-            <a href="https://www.linkedin.com/in/jaisingh-pal-1a9680143/" target="_blank" rel="noopener noreferrer"
-              >LinkedIn Profile</a
-            >
+            <a href="https://www.linkedin.com/in/jaisingh-pal-1a9680143/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile of Jaisingh Pal">LinkedIn Profile</a>
           </div>
-          <div class="contact-item">
+          <div class="contact-item" tabindex="0">
             <i class="fa-solid fa-book" aria-hidden="true"></i>
-            <a href="https://scholar.google.com/citations?hl=en&user=YKiYNxwAAAAJ" target="_blank" rel="noopener noreferrer"
-              >Google Scholar</a
-            >
+            <a href="https://scholar.google.com/citations?hl=en&user=YKiYNxwAAAAJ" target="_blank" rel="noopener noreferrer" aria-label="Google Scholar profile of Jaisingh Pal">Google Scholar</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Light/Dark mode toggle button -->
+  <button id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle light/dark mode">
+    <i class="fa-regular fa-moon"></i>
+  </button>
+
   <script>
-    // Smooth scroll and active link highlight
-    const navLinks = document.querySelectorAll(".nav-links a");
-    const sections = [...navLinks].map((link) =>
-      document.querySelector(link.getAttribute("href"))
-    );
-
-    function onScroll() {
-      const scrollPos = window.scrollY + 120;
-      for (let i = sections.length - 1; i >= 0; i--) {
-        if (sections[i] && scrollPos >= sections[i].offsetTop) {
-          navLinks.forEach((link) => link.classList.remove("active"));
-          navLinks[i].classList.add("active");
-          break;
-        }
-      }
-    }
-
-    window.addEventListener("scroll", onScroll);
-
-    // Hamburger menu toggle
-    const hamburgerBtn = document.getElementById("hamburgerBtn");
-    const navLinksContainer = document.getElementById("navLinks");
-
-    function toggleMenu() {
-      navLinksContainer.classList.toggle("open");
-      hamburgerBtn.classList.toggle("open");
-    }
-
-    hamburgerBtn.addEventListener("click", toggleMenu);
-    hamburgerBtn.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        toggleMenu();
-      }
-    });
-
-    // Close menu on clicking a nav link (mobile)
-    navLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (navLinksContainer.classList.contains("open")) toggleMenu();
-      });
-    });
-
-    // Fade in animations on scroll
-    const fadeInElements = document.querySelectorAll(".fade-in");
-    const fadeInOptions = {
-      threshold: 0.05,
-      rootMargin: "0px 0px -100px 0px",
-    };
-    const fadeInObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, fadeInOptions);
-
-    fadeInElements.forEach((el) => fadeInObserver.observe(el));
-
-    // Hero content fadeIn delay and show
-    document.addEventListener("DOMContentLoaded", () => {
-      const heroContent = document.querySelector(".hero-content");
-      setTimeout(() => {
-        heroContent.classList.add("visible");
-      }, 350);
-    });
-
-    // Scroll progress bar
+    // Scroll Progress Bar
     const progressBar = document.getElementById("progressBar");
     window.addEventListener("scroll", () => {
-      const scrollTop = window.pageYOffset;
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = (scrollTop / docHeight) * 100;
-      progressBar.style.width = progress + "%";
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      progressBar.style.width = scrollPercent + "%";
 
       const header = document.querySelector("header");
       if (scrollTop > 100) {
         header.style.background = "rgba(255, 255, 255, 0.98)";
-        header.style.boxShadow = "0 4px 14px rgb(0 0 0 / 0.07)";
+        header.style.boxShadow = "0 6px 24px rgba(0, 0, 0, 0.12)";
       } else {
         header.style.background = "rgba(255, 255, 255, 0.95)";
-        header.style.boxShadow = "0 2px 8px rgb(0 0 0 / 0.05)";
+        header.style.boxShadow = "0 4px 20px rgba(0, 0, 0, 0.06)";
+      }
+    });
+
+    // Smooth Scroll & Active Link Highlight
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const sections = Array.from(navLinks).map((link) => document.querySelector(link.getAttribute("href")));
+
+    function setActiveLink() {
+      let scrollPos = window.scrollY + window.innerHeight / 4;
+      for (let i = sections.length - 1; i >= 0; i--) {
+        if (sections[i] && scrollPos >= sections[i].offsetTop) {
+          navLinks.forEach((link) => link.classList.remove("active"));
+          if (navLinks[i]) navLinks[i].classList.add("active");
+          break;
+        }
+      }
+    }
+    window.addEventListener("scroll", setActiveLink);
+
+    // Hamburger Menu Toggle
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const navLinksContainer = document.getElementById("navLinks");
+    hamburgerBtn.addEventListener("click", () => {
+      const expanded = hamburgerBtn.getAttribute("aria-expanded") === "true" || false;
+      hamburgerBtn.setAttribute("aria-expanded", !expanded);
+      hamburgerBtn.classList.toggle("open");
+      navLinksContainer.classList.toggle("open");
+    });
+
+    hamburgerBtn.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        hamburgerBtn.click();
+      }
+    });
+
+    // Close menu on nav link click (mobile)
+    navLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        if (navLinksContainer.classList.contains("open")) {
+          hamburgerBtn.setAttribute("aria-expanded", false);
+          hamburgerBtn.classList.remove("open");
+          navLinksContainer.classList.remove("open");
+        }
+      });
+    });
+
+    // Fade in elements on scroll
+    const fadeIns = document.querySelectorAll(".fade-in");
+    const fadeObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    fadeIns.forEach(el => fadeObserver.observe(el));
+
+    // Enable card flip accessibility: flip on keyboard focus & blur remove flip
+    const flipCards = document.querySelectorAll(".project-card");
+    flipCards.forEach(card => {
+      card.addEventListener("focus", () => {
+        card.querySelector(".project-inner").style.transform = "rotateY(180deg)";
+      });
+      card.addEventListener("blur", () => {
+        card.querySelector(".project-inner").style.transform = "rotateY(0deg)";
+      });
+    });
+
+    // Light/Dark Mode Toggle
+    const themeToggleBtn = document.getElementById("themeToggle");
+    const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const currentTheme = localStorage.getItem("theme");
+
+    if (currentTheme === "dark" || (!currentTheme && prefersDarkScheme.matches)) {
+      document.body.classList.add("dark-theme");
+      themeToggleBtn.innerHTML = '<i class="fa-regular fa-sun"></i>';
+    }
+
+    themeToggleBtn.addEventListener("click", () => {
+      document.body.classList.toggle("dark-theme");
+      if (document.body.classList.contains("dark-theme")) {
+        themeToggleBtn.innerHTML = '<i class="fa-regular fa-sun"></i>';
+        localStorage.setItem("theme", "dark");
+      } else {
+        themeToggleBtn.innerHTML = '<i class="fa-regular fa-moon"></i>';
+        localStorage.setItem("theme", "light");
       }
     });
   </script>
+
+  <style>
+    /* Screen Reader only */
+    .sr-only {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      border: 0 !important;
+    }
+  </style>
 </body>
 
 </html>
