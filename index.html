@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -33,8 +36,10 @@
       text-decoration: none;
     }
 
-    a:hover {
+    a:hover,
+    a:focus {
       color: #2563eb;
+      outline: none;
     }
 
     .container {
@@ -93,6 +98,7 @@
       cursor: default;
     }
 
+    /* Nav Links */
     .nav-links {
       display: flex;
       list-style: none;
@@ -201,6 +207,7 @@
       padding-bottom: 4rem;
     }
 
+    /* Morphing blob background animation */
     .morph-blob {
       position: absolute;
       top: 140px;
@@ -230,6 +237,7 @@
       }
     }
 
+    /* Hero content grid */
     .hero-content {
       position: relative;
       z-index: 10;
@@ -242,10 +250,6 @@
       animation-delay: 0.3s;
     }
 
-    .hero-content.visible {
-      opacity: 1;
-    }
-
     .hero-text h1 {
       font-size: 4.5rem;
       font-weight: 900;
@@ -254,6 +258,33 @@
       user-select: text;
       letter-spacing: 0.07em;
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.35);
+      /* Typing animation */
+      white-space: nowrap;
+      border-right: 3px solid rgba(255, 255, 255, 0.75);
+      overflow: hidden;
+      max-width: 14ch;
+      animation: typing 3.5s steps(14) forwards, blink 1s step-end infinite;
+    }
+
+    @keyframes typing {
+      from {
+        max-width: 0;
+      }
+
+      to {
+        max-width: 14ch;
+      }
+    }
+
+    @keyframes blink {
+      0%,
+      100% {
+        border-color: rgba(255, 255, 255, 0.75);
+      }
+
+      50% {
+        border-color: transparent;
+      }
     }
 
     .hero-text .subtitle {
@@ -292,22 +323,41 @@
       user-select: none;
       transition: all 0.4s ease;
       text-align: center;
+      user-select: none;
+      /* Button hover animation */
+      animation: pulse 2.5s infinite ease-in-out;
     }
 
-    .cta-button:hover {
+    .cta-button:hover,
+    .cta-button:focus {
       background: rgba(255, 255, 255, 0.38);
       border-color: rgba(255, 255, 255, 0.75);
       transform: scale(1.07) translateY(-3px);
       box-shadow:
         0 10px 38px rgba(255, 255, 255, 0.4),
         0 2px 12px rgba(38, 99, 235, 0.6);
+      outline: none;
+      animation-play-state: paused;
     }
 
+    @keyframes pulse {
+      0%,
+      100% {
+        box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 20px 6px rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    /* Hero image - with subtle 3D tilt on hover */
     .hero-image {
       position: relative;
       justify-self: center;
       user-select: none;
       perspective: 600px;
+      filter: drop-shadow(0 12px 8px rgba(0, 0, 0, 0.15));
     }
 
     .profile-image {
@@ -318,13 +368,14 @@
       border: 6px solid rgba(255, 255, 255, 0.35);
       box-shadow: 0 26px 48px rgba(0, 0, 0, 0.34);
       transform-style: preserve-3d;
-      transition: transform 0.45s ease, box-shadow 0.45s ease;
+      transition: transform 0.6s ease, box-shadow 0.6s ease;
       cursor: default;
       user-select: none;
       background: white;
     }
 
-    .hero-image:hover .profile-image {
+    .hero-image:hover .profile-image,
+    .hero-image:focus-within .profile-image {
       transform: rotateY(10deg) rotateX(5deg) scale(1.08);
       box-shadow: 0 36px 78px rgba(37, 99, 235, 0.6);
     }
@@ -339,6 +390,8 @@
       letter-spacing: 0.04em;
       position: relative;
       user-select: none;
+      text-transform: uppercase;
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
 
     h2.section-title::after {
@@ -385,25 +438,22 @@
       animation: fadeInUp 1.2s forwards;
     }
 
-    .about-content.visible {
-      opacity: 1;
-    }
-
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1.5rem;
+      justify-items: center;
     }
 
     .skill-item {
-      background: #f8fafc;
-      border: 2px solid #e2e8f0;
+      background: #f3f4f6;
+      border: 2px solid #e0e7ff;
       border-radius: 16px;
       padding: 1.15rem 1.35rem;
       text-align: center;
       font-weight: 700;
-      color: #334155;
-      font-size: 1.1rem;
+      color: #4338ca;
+      font-size: 1.15rem;
       transition:
         box-shadow 0.35s ease,
         transform 0.35s ease;
@@ -412,14 +462,24 @@
         0 1px 3px rgb(0 0 0 / 0.07),
         0 1px 2px rgb(0 0 0 / 0.06);
       user-select: text;
+      user-select: text;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .skill-item i {
+      font-size: 1.4rem;
+      color: #2563eb;
     }
 
-    .skill-item:hover {
-      transform: translateY(-8px) scale(1.03);
+    .skill-item:hover,
+    .skill-item:focus {
+      transform: translateY(-8px) scale(1.05);
       box-shadow:
-        0 19px 38px rgb(99 102 241 / 0.35),
-        0 12px 24px rgb(99 102 241 / 0.26);
+        0 19px 38px rgb(99 102 241 / 0.45),
+        0 12px 24px rgb(99 102 241 / 0.36);
       border-color: #4338ca;
+      outline: none;
     }
 
     .about-text {
@@ -428,6 +488,7 @@
       color: #475569;
       font-weight: 400;
       user-select: text;
+      letter-spacing: 0.02em;
     }
 
     /* Section Dividers with SVG wave shape */
@@ -458,10 +519,6 @@
       position: relative;
       opacity: 0;
       animation: fadeInUp 1.2s forwards;
-    }
-
-    .timeline.visible {
-      opacity: 1;
     }
 
     .timeline::before {
@@ -510,11 +567,13 @@
       margin-left: 55px;
     }
 
-    .timeline-item:hover {
+    .timeline-item:hover,
+    .timeline-item:focus-within {
       transform: translateY(-10px);
       box-shadow:
         0 26px 50px rgb(37 99 235 / 0.35),
         0 10px 30px rgb(37 99 235 / 0.25);
+      outline: none;
     }
 
     .timeline-date {
@@ -560,10 +619,6 @@
       animation: fadeInUp 1.2s forwards;
     }
 
-    .projects-grid.visible {
-      opacity: 1;
-    }
-
     .project-card {
       perspective: 1100px;
       cursor: pointer;
@@ -577,11 +632,20 @@
       width: 100%;
       height: 280px;
       position: relative;
+      /* subtle shadow glow on hover */
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
     }
 
     .project-card:focus-visible {
       outline: 3px solid #2563ebaa;
       outline-offset: 6px;
+    }
+
+    .project-card:hover,
+    .project-card:focus {
+      box-shadow:
+        0 24px 98px rgba(37, 99, 235, 0.38);
+      transform: scale(1.04);
     }
 
     .project-inner {
@@ -591,15 +655,16 @@
       position: relative;
       transform-style: preserve-3d;
       transition: transform 0.68s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow:
-        0 10px 48px rgb(0 0 0 / 0.09);
+      box-shadow: 0 10px 48px rgb(0 0 0 / 0.09);
+      background-size: cover;
+      background-position: center;
     }
 
     .project-card:hover .project-inner,
     .project-card:focus .project-inner {
       transform: rotateY(180deg);
       box-shadow:
-        0 24px 98px rgb(37 99 235 / 0.38);
+        0 34px 118px rgb(37 99 235 / 0.48);
     }
 
     .project-front,
@@ -612,7 +677,7 @@
       left: 0;
       color: white;
       user-select: none;
-      padding: 1.8rem 2rem 2rem;
+      padding: 2rem 2.5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -620,17 +685,38 @@
       text-align: center;
       backface-visibility: hidden;
       cursor: default;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      box-shadow: 0 6px 18px rgb(0 0 0 / 0.3);
+      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     }
 
     .project-front {
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       font-weight: 700;
-      font-size: 1.25rem;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-      text-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+      font-size: 1.3rem;
       letter-spacing: 0.06em;
       user-select: text;
       border: 0;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Add a project front image */
+    .project-front img {
+      max-width: 90px;
+      max-height: 90px;
+      object-fit: contain;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+      transition: transform 0.4s ease;
+    }
+
+    .project-card:hover .project-front img {
+      transform: scale(1.15);
     }
 
     .project-back {
@@ -645,6 +731,18 @@
       letter-spacing: 0.03em;
       color: #dbdbdb;
       padding-top: 2.2rem;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(255,255,255,0.5) transparent;
+    }
+
+    .project-back::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .project-back::-webkit-scrollbar-thumb {
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 6px;
     }
 
     /* Experience Section */
@@ -661,10 +759,6 @@
       animation: fadeInUp 1.2s forwards;
     }
 
-    .experience-list.visible {
-      opacity: 1;
-    }
-
     .experience-item {
       background: white;
       border-left: 6px solid #2563eb;
@@ -678,10 +772,12 @@
       user-select: text;
     }
 
-    .experience-item:hover {
+    .experience-item:hover,
+    .experience-item:focus-within {
       transform: translateX(10px);
       box-shadow:
         0 25px 48px rgba(37, 99, 235, 0.28);
+      outline: none;
     }
 
     .experience-title {
@@ -714,6 +810,7 @@
     #publications {
       background: white;
       padding: 6.5rem 0 9rem;
+      user-select: none;
     }
 
     #publications h2 {
@@ -733,10 +830,6 @@
       letter-spacing: 0.02em;
     }
 
-    #publications ol.visible {
-      opacity: 1;
-    }
-
     #publications li {
       margin-bottom: 1.4rem;
     }
@@ -747,9 +840,11 @@
       transition: color 0.3s ease;
     }
 
-    #publications a:hover {
+    #publications a:hover,
+    #publications a:focus {
       color: #4338ca;
       text-decoration: underline;
+      outline: none;
     }
 
     /* Contact Section */
@@ -766,10 +861,6 @@
       text-align: center;
       opacity: 0;
       animation: fadeInUp 1.3s forwards;
-    }
-
-    .contact-content.visible {
-      opacity: 1;
     }
 
     .contact-content h2 {
@@ -809,8 +900,10 @@
       transition: color 0.3s ease;
     }
 
-    .contact-item:hover {
+    .contact-item:hover,
+    .contact-item:focus {
       color: #60a5fa;
+      outline: none;
     }
 
     .contact-item i {
@@ -853,8 +946,10 @@
       transition: transform 0.4s ease;
     }
 
-    #themeToggle:hover {
+    #themeToggle:hover,
+    #themeToggle:focus {
       background: #4338ca;
+      outline: none;
     }
 
     /* Responsive Adjustments */
@@ -927,6 +1022,42 @@
       clip: rect(0, 0, 0, 0) !important;
       border: 0 !important;
     }
+
+    /* Dark theme */
+    body.dark-theme {
+      background-color: #1e293b;
+      color: #cbd5e1;
+    }
+
+    body.dark-theme a {
+      color: #93c5fd;
+    }
+
+    body.dark-theme header {
+      background: rgba(30, 41, 59, 0.95);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    body.dark-theme .nav-links {
+      background: #0f172a;
+      border-left: 2.5px solid #3b82f6;
+      box-shadow: 0 12px 32px rgb(59 130 246 / 0.3);
+    }
+
+    body.dark-theme .hero {
+      background: linear-gradient(135deg, #1e40af 0%, #7c3aed 100%);
+      color: #e0e7ff;
+    }
+
+    body.dark-theme .project-front {
+      background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+      color: #e0e7ff;
+    }
+
+    body.dark-theme .project-back {
+      background: linear-gradient(120deg, #1e40af, #7c3aed);
+      color: #cbd5e1;
+    }
   </style>
 
 </head>
@@ -968,9 +1099,9 @@
           d="M329.1,283.7Q303,327,257,343Q211,359,180.1,337.5Q149.3,316,126.3,280.5Q103.3,245,106.3,194.9Q109.3,144.8,153.9,109.4Q198.5,74,250.5,90.9Q302.6,107.8,323.5,153.6Q344.4,199.5,329.1,283.7Z" />
       </svg>
 
-      <div class="hero-content">
+      <div class="hero-content" aria-live="polite">
         <div class="hero-text">
-          <h1>Jaisingh Pal</h1>
+          <h1 aria-label="Name">Jaisingh Pal</h1>
           <p class="subtitle">Ph.D Scholar, EE, IIT Gandhinagar, nanoDC Lab - 13/301</p>
           <p class="description">
             Pursuing Ph.D in Semiconductor Devices at IIT Gandhinagar with expertise in TCAD simulation, device
@@ -993,13 +1124,13 @@
       <h2 class="section-title fade-in">About Me</h2>
       <div class="about-content fade-in">
         <div class="skills-grid" aria-label="Skills and Expertise">
-          <div class="skill-item" tabindex="0">Sentaurus TCAD</div>
-          <div class="skill-item" tabindex="0">Cadence Virtuoso</div>
-          <div class="skill-item" tabindex="0">Device Characterization</div>
-          <div class="skill-item" tabindex="0">Analog Circuit Design</div>
-          <div class="skill-item" tabindex="0">EasyExpert</div>
-          <div class="skill-item" tabindex="0">Velox</div>
-          <div class="skill-item" tabindex="0">MATLAB</div>
+          <div class="skill-item" tabindex="0"><i class="fa-solid fa-microchip"></i> Sentaurus TCAD</div>
+          <div class="skill-item" tabindex="0"><i class="fa-solid fa-desktop"></i> Cadence Virtuoso</div>
+          <div class="skill-item" tabindex="0"><i class="fa-solid fa-vial"></i> Device Characterization</div>
+          <div class="skill-item" tabindex="0"><i class="fa-solid fa-wrench"></i> Analog Circuit Design</div>
+          <div class="skill-item" tabindex="0"><i class="fa-solid fa-code"></i> EasyExpert</div>
+          <div class="skill-item" tabindex="0"><i class="fa-solid fa-gear"></i> Velox</div>
+          <div class="skill-item" tabindex="0"><i class="fa-solid fa-calculator"></i> MATLAB</div>
         </div>
         <div class="about-text" tabindex="0">
           <p>
@@ -1051,14 +1182,14 @@
         <div class="timeline-item" role="listitem" tabindex="0">
           <div class="timeline-content">
             <div class="timeline-date">2017</div>
-            <div class="timeline-title">12th(Science)</div>
+            <div class="timeline-title">12th (Science)</div>
             <div class="timeline-subtitle">Bhonsala Military College</div>
           </div>
         </div>
         <div class="timeline-item" role="listitem" tabindex="0">
           <div class="timeline-content">
             <div class="timeline-date">2015</div>
-            <div class="timeline-title">10th(SSC)</div>
+            <div class="timeline-title">10th (SSC)</div>
             <div class="timeline-subtitle">Vidya Prabodhini School</div>
           </div>
         </div>
@@ -1123,13 +1254,17 @@
     <div class="container">
       <h2 class="section-title fade-in">Research Projects</h2>
       <div class="projects-grid fade-in" role="list">
-        <div class="project-card" tabindex="0" role="listitem" aria-label="2D Simulation of Heterostructure Bipolar Transistor project">
+        <div class="project-card" tabindex="0" role="listitem"
+          aria-label="2D Simulation of Heterostructure Bipolar Transistor project">
           <div class="project-inner">
             <div class="project-front" aria-hidden="false">
+              <img src="images/hbt-simulation.png" alt="HBT Simulation Visualization" />
               2D TCAD HBT Simulation
             </div>
-            <div class="project-back" aria-hidden="true">
-              Advanced TCAD simulation of HBT structures incorporating heterojunctions between different semiconductor materials. Focus on high-frequency and high-speed applications with superior performance characteristics compared to traditional BJTs.
+            <div class="project-back" aria-hidden="true" tabindex="0">
+              Advanced TCAD simulation of HBT structures incorporating heterojunctions between different semiconductor
+              materials. Focus on high-frequency and high-speed applications with superior performance characteristics
+              compared to traditional BJTs.
             </div>
           </div>
         </div>
@@ -1137,10 +1272,12 @@
         <div class="project-card" tabindex="0" role="listitem" aria-label="3D Simulation of Complementary FET project">
           <div class="project-inner">
             <div class="project-front" aria-hidden="false">
+              <img src="images/cfet-structure.png" alt="CFET 3D Structural Model" />
               3D CFET Structure
             </div>
-            <div class="project-back" aria-hidden="true">
-              Comprehensive study of CFETs integrating n-type and p-type transistors on single substrates. Enhanced power efficiency, reduced heat dissipation, and potential for 3D integration addressing miniaturization challenges.
+            <div class="project-back" aria-hidden="true" tabindex="0">
+              Comprehensive study of CFETs integrating n-type and p-type transistors on single substrates. Enhanced power
+              efficiency, reduced heat dissipation, and potential for 3D integration addressing miniaturization challenges.
             </div>
           </div>
         </div>
@@ -1148,10 +1285,12 @@
         <div class="project-card" tabindex="0" role="listitem" aria-label="Radiation-Hardened 14T SRAM Bitcell project">
           <div class="project-inner">
             <div class="project-front" aria-hidden="false">
+              <img src="images/sram-bitcell.jpg" alt="14T SRAM Bitcell" />
               Radiation-Hardened SRAM
             </div>
-            <div class="project-back" aria-hidden="true">
-              Speed and power optimized design for space applications. Implementation of robust design methodologies, hardened materials, and redundancy techniques to enhance radiation tolerance of semiconductor devices.
+            <div class="project-back" aria-hidden="true" tabindex="0">
+              Speed and power optimized design for space applications. Implementation of robust design methodologies,
+              hardened materials, and redundancy techniques to enhance radiation tolerance of semiconductor devices.
             </div>
           </div>
         </div>
@@ -1159,10 +1298,13 @@
         <div class="project-card" tabindex="0" role="listitem" aria-label="Advanced Analog Circuit Design project">
           <div class="project-inner">
             <div class="project-front" aria-hidden="false">
+              <img src="images/analog-circuits.png" alt="Analog Circuit Design Schematic" />
               Analog Circuit Design
             </div>
-            <div class="project-back" aria-hidden="true">
-              Low-power 2-stage OP-AMP design in SCL 180nm technology. Band-gap reference circuit with temperature compensation and configurable amplifier analysis including CS-CS cascade, telescopic cascode, and gain-boosted configurations.
+            <div class="project-back" aria-hidden="true" tabindex="0">
+              Low-power 2-stage OP-AMP design in SCL 180nm technology. Band-gap reference circuit with temperature
+              compensation and configurable amplifier analysis including CS-CS cascade, telescopic cascode, and gain-boosted
+              configurations.
             </div>
           </div>
         </div>
@@ -1170,10 +1312,12 @@
         <div class="project-card" tabindex="0" role="listitem" aria-label="3D NAND Flash Memory Research project">
           <div class="project-inner">
             <div class="project-front" aria-hidden="false">
+              <img src="images/3d-nand-flash.png" alt="3D NAND Flash Structure" />
               3D NAND Flash
             </div>
-            <div class="project-back" aria-hidden="true">
-              Comprehensive review of vertical stacking architecture for higher density storage. Analysis of improved performance, enhanced endurance and reliability features, and future trends in 3D NAND technology.
+            <div class="project-back" aria-hidden="true" tabindex="0">
+              Comprehensive review of vertical stacking architecture for higher density storage. Analysis of improved
+              performance, enhanced endurance and reliability features, and future trends in 3D NAND technology.
             </div>
           </div>
         </div>
@@ -1181,10 +1325,12 @@
         <div class="project-card" tabindex="0" role="listitem" aria-label="Silicon-Germanium HBT Analysis project">
           <div class="project-inner">
             <div class="project-front" aria-hidden="false">
+              <img src="images/sige-hbt.png" alt="SiGe HBT Device Image" />
               SiGe HBT Research
             </div>
-            <div class="project-back" aria-hidden="true">
-              In-depth study of SiGe HBT fabrication techniques, device physics, and performance metrics. Focus on high-frequency applications in communication systems and exploration of future research directions.
+            <div class="project-back" aria-hidden="true" tabindex="0">
+              In-depth study of SiGe HBT fabrication techniques, device physics, and performance metrics. Focus on
+              high-frequency applications in communication systems and exploration of future research directions.
             </div>
           </div>
         </div>
@@ -1241,7 +1387,7 @@
   </section>
 
   <!-- Light/Dark mode toggle button -->
-  <button id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle light/dark mode">
+  <button id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle light/dark mode" tabindex="0">
     <i class="fa-regular fa-moon"></i>
   </button>
 
@@ -1266,13 +1412,13 @@
 
     // Smooth Scroll & Active Link Highlight
     const navLinks = document.querySelectorAll(".nav-links a");
-    const sections = Array.from(navLinks).map((link) => document.querySelector(link.getAttribute("href")));
+    const sections = Array.from(navLinks).map(link => document.querySelector(link.getAttribute("href")));
 
     function setActiveLink() {
       let scrollPos = window.scrollY + window.innerHeight / 4;
       for (let i = sections.length - 1; i >= 0; i--) {
         if (sections[i] && scrollPos >= sections[i].offsetTop) {
-          navLinks.forEach((link) => link.classList.remove("active"));
+          navLinks.forEach(link => link.classList.remove("active"));
           if (navLinks[i]) navLinks[i].classList.add("active");
           break;
         }
