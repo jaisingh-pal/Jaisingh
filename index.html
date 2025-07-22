@@ -1,283 +1,798 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jaisingh Pal - Ph.D Researcher & Semiconductor Engineer</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jaisingh Pal - Ph.D Researcher & Semiconductor Engineer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background: #fafafa;
-      overflow-x: hidden;
-    }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fafafa;
+            overflow-x: hidden;
+        }
 
-    :root {
-      scroll-padding-top: 80px;
-    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
 
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(20px);
-      z-index: 1000;
-      padding: 1rem 0;
-      transition: all 0.3s ease;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: relative;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #2563eb;
-      text-decoration: none;
-    }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
 
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
 
-    .nav-links a {
-      text-decoration: none;
-      color: #666;
-      font-weight: 500;
-      position: relative;
-    }
+        .nav-links a:hover {
+            color: #2563eb;
+        }
 
-    .nav-links a:hover {
-      color: #2563eb;
-    }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #2563eb;
+            transition: width 0.3s ease;
+        }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #2563eb;
-      transition: width 0.3s ease;
-    }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
 
-    .nav-links a:hover::after {
-      width: 100%;
-    }
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .hamburger {
-      display: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #2563eb;
-    }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,1000 1000,200 1000,1000"/></svg>');
+        }
 
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            align-items: center;
+        }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><polygon fill="%23ffffff08" points="0,1000 1000,200 1000,1000"/></svg>');
-    }
+        .hero-text {
+            /* Text content styles remain the same */
+        }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      animation: fadeInUp 1s ease;
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 4rem;
-      align-items: center;
-    }
+        .hero-image {
+            position: relative;
+        }
 
-    .hero h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      line-height: 1.1;
-    }
+        .profile-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
 
-    .subtitle {
-      font-size: 1.5rem;
-      margin-bottom: 2rem;
-      opacity: 0.9;
-      font-weight: 300;
-    }
+        .profile-image:hover {
+            transform: scale(1.05);
+        }
 
-    .description {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin-bottom: 3rem;
-      opacity: 0.8;
-      line-height: 1.7;
-    }
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
 
-    .cta-button {
-      display: inline-block;
-      padding: 1rem 2.5rem;
-      background: rgba(255, 255, 255, 0.2);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
 
-    .cta-button:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    }
+        .hero .description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
 
-    .profile-image {
-      width: 280px;
-      height: 280px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 6px solid rgba(255, 255, 255, 0.2);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      transition: transform 0.3s ease;
-    }
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
 
-    .profile-image:hover {
-      transform: scale(1.05);
-    }
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: white;
+        }
 
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        background: white;
-        position: absolute;
-        top: 100%;
-        right: 0;
-        width: 100%;
-        text-align: center;
-        border-top: 1px solid #e5e7eb;
-        z-index: 999;
-      }
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e293b;
+            position: relative;
+        }
 
-      .nav-links.show {
-        display: flex;
-      }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            border-radius: 2px;
+        }
 
-      .nav-links li {
-        padding: 1rem 0;
-      }
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
 
-      .hamburger {
-        display: block;
-      }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
 
-      .hero h1 {
-        font-size: 2.5rem;
-      }
+        .skill-item {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
 
-      .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 2rem;
-      }
+        .skill-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
 
-      .hero-image {
-        order: -1;
-      }
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #64748b;
+        }
 
-      .profile-image {
-        width: 200px;
-        height: 200px;
-      }
-    }
-  </style>
+        /* Education Section */
+        .education {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, #2563eb, #7c3aed);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 45%;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 55%;
+            text-align: left;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+        }
+
+        .timeline-date {
+            color: #2563eb;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+        }
+
+        .timeline-subtitle {
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 0;
+            background: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1e293b;
+        }
+
+        .project-description {
+            color: #64748b;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Experience Section */
+        .experience {
+            padding: 6rem 0;
+            background: #f8fafc;
+        }
+
+        .experience-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .experience-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid #2563eb;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(5px);
+        }
+
+        .experience-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-duration {
+            color: #2563eb;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .experience-description {
+            color: #64748b;
+            line-height: 1.7;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            color: white;
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            color: #60a5fa;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-image {
+                order: -1;
+                margin-bottom: 1rem;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                width: calc(100% - 40px);
+                left: 40px !important;
+                text-align: left !important;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <nav class="container">
-      <a href="#home" class="logo">Jaisingh Pal</a>
-      <div class="hamburger" onclick="toggleMenu()">☰</div>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <nav class="container">
+            <a href="#home" class="logo">Jaisingh Pal</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <section id="home" class="hero">
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Jaisingh Pal</h1>
+                    <p class="subtitle">Ph.D Researcher & Semiconductor Engineer</p>
+                    <p class="description">
+                        Pursuing Ph.D in Semiconductor Devices at IIT Gandhinagar with expertise in TCAD simulation, 
+                        device characterization, and analog circuit design. Passionate about advancing semiconductor 
+                        technology through innovative research and practical applications.
+                    </p>
+                    <a href="#about" class="cta-button">Learn More</a>
+                </div>
+                <div class="hero-image">
+                    <img src="jaisingh.png" class="profile-image" alt="Jaisingh Pal">
+                </div>
+            </div>
+        </div>
+    </section>
+
+       
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content fade-in">
+                <div class="skills-grid">
+                    <div class="skill-item">Sentaurus TCAD</div>
+                    <div class="skill-item">Cadence Virtuoso</div>
+                    <div class="skill-item">Device Characterization</div>
+                    <div class="skill-item">Analog Circuit Design</div>
+                    <div class="skill-item">EasyExpert</div>
+                    <div class="skill-item">Velox</div>
+                    <div class="skill-item">MATLAB</div>
+                </div>
+                <div class="about-text">
+                    <p>
+                        As a Ph.D candidate at IIT Gandhinagar specializing in Semiconductor Devices, I combine 
+                        theoretical knowledge with practical expertise in advanced semiconductor technologies. 
+                        My research focuses on cutting-edge device simulation and characterization techniques.
+                    </p>
+                    <p>
+                        With hands-on experience in wafer characterization and teaching assistance, I am committed 
+                        to pushing the boundaries of semiconductor technology while fostering the next generation 
+                        of engineers through education and mentorship.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="education" class="education">
     <div class="container">
-      <div class="hero-content">
-        <div class="hero-text">
-          <h1>Jaisingh Pal</h1>
-          <p class="subtitle">Ph.D Researcher & Semiconductor Engineer</p>
-          <p class="description">
-            Pursuing Ph.D in Semiconductor Devices at IIT Gandhinagar with expertise in TCAD simulation,
-            device characterization, and analog circuit design. Passionate about advancing semiconductor
-            technology through innovative research and practical applications.
-          </p>
-          <a href="#about" class="cta-button">Learn More</a>
+        <h2 class="section-title fade-in">Education</h2>
+        <div class="timeline fade-in">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Pursuing</div>
+                    <div class="timeline-title">Ph.D in Semiconductor Devices</div>
+                    <div class="timeline-subtitle">IIT Gandhinagar</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">June 2022</div>
+                    <div class="timeline-title">B.Tech in Electronics and Telecommunication</div>
+                    <div class="timeline-subtitle">VIIT Pune</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">May 2019</div>
+                    <div class="timeline-title">Diploma in Electronics and Telecommunication</div>
+                    <div class="timeline-subtitle">Sandip Polytechnic</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">Feb 2017</div>
+                    <div class="timeline-title">Class XII – Science </div>
+                    <div class="timeline-subtitle">Bhonsala Military College</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-date">June 2015</div>
+                    <div class="timeline-title">Class X </div>
+                    <div class="timeline-subtitle">Vidya Prabodhini</div>
+                </div>
+            </div>
         </div>
-        <div class="hero-image">
-          <img src="jaisingh.png" class="profile-image" alt="Profile picture of Jaisingh Pal">
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <script>
-    function toggleMenu() {
-      document.querySelector('.nav-links').classList.toggle('show');
-    }
-  </script>
+
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title fade-in">Research Projects</h2>
+            <div class="projects-grid fade-in">
+                <div class="project-card">
+                    <div class="project-image">2D TCAD HBT Simulation</div>
+                    <div class="project-content">
+                        <div class="project-title">2D Simulation of Heterostructure Bipolar Transistor</div>
+                        <div class="project-description">
+                            Advanced TCAD simulation of HBT structures incorporating heterojunctions between different 
+                            semiconductor materials. Focus on high-frequency and high-speed applications with superior 
+                            performance characteristics compared to traditional BJTs.
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">3D CFET Structure</div>
+                    <div class="project-content">
+                        <div class="project-title">3D Simulation of Complementary FET</div>
+                        <div class="project-description">
+                            Comprehensive study of CFETs integrating n-type and p-type transistors on single substrates. 
+                            Enhanced power efficiency, reduced heat dissipation, and potential for 3D integration 
+                            addressing miniaturization challenges.
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">Radiation-Hardened SRAM</div>
+                    <div class="project-content">
+                        <div class="project-title">Radiation-Hardened 14T SRAM Bitcell</div>
+                        <div class="project-description">
+                            Speed and power optimized design for space applications. Implementation of robust design 
+                            methodologies, hardened materials, and redundancy techniques to enhance radiation 
+                            tolerance of semiconductor devices.
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">Analog Circuit Design</div>
+                    <div class="project-content">
+                        <div class="project-title">Advanced Analog Circuit Design</div>
+                        <div class="project-description">
+                            Low-power 2-stage OP-AMP design in SCL 180nm technology. Band-gap reference circuit with 
+                            temperature compensation and configurable amplifier analysis including CS-CS cascade, 
+                            telescopic cascode, and gain-boosted configurations.
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">3D NAND Flash</div>
+                    <div class="project-content">
+                        <div class="project-title">3D NAND Flash Memory Research</div>
+                        <div class="project-description">
+                            Comprehensive review of vertical stacking architecture for higher density storage. 
+                            Analysis of improved performance, enhanced endurance and reliability features, 
+                            and future trends in 3D NAND technology.
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">SiGe HBT Research</div>
+                    <div class="project-content">
+                        <div class="project-title">Silicon-Germanium HBT Analysis</div>
+                        <div class="project-description">
+                            In-depth study of SiGe HBT fabrication techniques, device physics, and performance metrics. 
+                            Focus on high-frequency applications in communication systems and exploration of future 
+                            research directions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-content fade-in">
+                <h2 class="section-title">Get In Touch</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                    Interested in collaboration, research opportunities, or discussing semiconductor innovations? 
+                    I'd love to connect with fellow researchers and industry professionals.
+                </p>
+               <div class="contact-info">
+    <div class="contact-item">
+        <span>📧</span>
+        <span><a href="mailto:harishkumarjaisingh@iitgn.ac.in" style="color: inherit; text-decoration: none;">harishkumarjaisingh@iitgn.ac.in</a></span>
+    </div>
+    <div class="contact-item">
+        <span>📞</span>
+        <span><a href="tel:+918805836345" style="color: inherit; text-decoration: none;">+91 88058 36345</a></span>
+    </div>
+    <div class="contact-item">
+        <span>💬</span>
+        <span><a href="https://wa.me/918805836345" target="_blank" style="color: inherit; text-decoration: none;">Chat on WhatsApp</a></span>
+    </div>
+    <div class="contact-item">
+        <span>💼</span>
+        <a href="https://www.linkedin.com/in/jaisingh-pal-1a9680143/" target="_blank" style="color: inherit; text-decoration: none;">LinkedIn Profile</a>
+    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Load and display profile image
+        async function loadProfileImage() {
+            try {
+                const imageData = await window.fs.readFile('image.png');
+                const blob = new Blob([imageData], { type: 'image/png' });
+                const imageUrl = URL.createObjectURL(blob);
+                document.getElementById('profileImage').src = imageUrl;
+            } catch (error) {
+                console.log('Profile image not found, using fallback');
+                // You can add a fallback image or hide the image container
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfileImage();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Header background on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
 </body>
 </html>
