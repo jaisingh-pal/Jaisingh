@@ -113,6 +113,12 @@
     border-radius:980px; transition:background .2s, transform .18s var(--ease);
   }
   .btn-blue:hover{background:var(--blue-hover); transform:translateY(-1px);}
+  .btn-outline{
+    border:1px solid var(--line); color:var(--ink); font-size:17px; padding:11px 22px;
+    border-radius:980px; display:inline-flex; align-items:center; gap:8px;
+    transition:border-color .2s, transform .18s var(--ease), background .2s;
+  }
+  .btn-outline:hover{border-color:#b3b3ba; background:#f4f4f6; transform:translateY(-1px);}
   .portrait{
     margin:52px auto 0; width:min(300px,72vw); aspect-ratio:1; border-radius:50%;
     object-fit:cover; box-shadow:0 30px 70px -30px rgba(0,0,0,.35);
@@ -345,6 +351,7 @@
       <a href="#experience">Experience</a>
       <a href="#gallery">Photos</a>
       <a href="#projects">Projects</a>
+      <a href="Jaisingh_Pal_CV.pdf" download>CV</a>
       <a class="pill" href="#contact">Contact</a>
       <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
     </nav>
@@ -359,6 +366,7 @@
     <p class="tag">Engineering tomorrow's transistors, one nanometer at a time.</p>
     <div class="ctas">
       <a class="btn-blue" href="#work">View publications</a>
+      <a class="btn-outline" href="Jaisingh_Pal_CV.pdf" download>Download CV ↓</a>
       <a class="tlink" href="#contact">Get in touch <span class="chev">›</span></a>
     </div>
     <img class="portrait scale-in" src="https://jaisingh-pal.github.io/Jaisingh/jaisingh.png" alt="Jaisingh Pal" />
@@ -517,9 +525,9 @@
       <a class="go" href="https://ieeexplore.ieee.org/abstract/document/11084946" target="_blank" rel="noopener">Read on IEEE Xplore ›</a>
     </div>
     <div class="pub reveal">
-      <span class="venue">IEEE Conf · 2025</span>
+      <span class="venue">ICEE · 2025</span>
       <h3>Parasitic Capacitance Analysis in Tapered CFET Devices for Advanced Technology Nodes</h3>
-      <p class="auth"><strong>Jaisingh Pal</strong>, N. R. Mohapatra · IEEE conference publication</p>
+      <p class="auth"><strong>Jaisingh Pal</strong>, N. R. Mohapatra · IEEE International Conference on Emerging Electronics (ICEE)</p>
       <a class="go" href="https://ieeexplore.ieee.org/abstract/document/11409786" target="_blank" rel="noopener">Read on IEEE Xplore ›</a>
     </div>
   </div>
@@ -563,11 +571,10 @@
     <div class="reveal">
       <h3 class="col-h">Education</h3>
       <div class="tl">
-        <div class="tl-item"><div class="tl-date">Jun 2022 — Present</div><div class="tl-title">Ph.D · Semiconductor Devices</div><div class="tl-org">IIT Gandhinagar</div></div>
-        <div class="tl-item"><div class="tl-date">May 2019</div><div class="tl-title">B.Tech · Electronics &amp; Telecommunication</div><div class="tl-org">VIIT Pune</div></div>
-        <div class="tl-item"><div class="tl-date">2017</div><div class="tl-title">Diploma · Electronics &amp; Telecommunication</div><div class="tl-org">Sandip Polytechnic</div></div>
-        <div class="tl-item"><div class="tl-date">2015</div><div class="tl-title">12th · Science</div><div class="tl-org">Bhonsala Military College</div></div>
-        <div class="tl-item"><div class="tl-date">2013</div><div class="tl-title">10th · SSC</div><div class="tl-org">Vidya Prabodhini School</div></div>
+        <div class="tl-item"><div class="tl-date">Jul 2022 — Present</div><div class="tl-title">Ph.D · Electrical Engineering</div><div class="tl-org">IIT Gandhinagar · NanoDC Lab</div></div>
+        <div class="tl-item"><div class="tl-date">2019 — 2022</div><div class="tl-title">B.Tech · Electronics &amp; Telecommunication</div><div class="tl-org">VIIT, Pune · CGPA 9.17/10</div></div>
+        <div class="tl-item"><div class="tl-date">2017 — 2019</div><div class="tl-title">Diploma · Electronics &amp; Telecommunication</div><div class="tl-org">Sandip Foundation · 85.47%</div></div>
+        <div class="tl-item"><div class="tl-date">2015 — 2016</div><div class="tl-title">Class X</div><div class="tl-org">Vidya Prabodhini Prashala, Nashik · 75.2%</div></div>
       </div>
     </div>
   </div>
