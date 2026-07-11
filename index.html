@@ -270,6 +270,9 @@
   .proj .k{font-size:12px; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--blue);}
   .proj h3{font-size:20px; font-weight:600; letter-spacing:-.02em; margin:12px 0 10px;}
   .proj p{font-size:14.5px; color:var(--ink-2); margin:0; line-height:1.5;}
+  .proj .plink{display:inline-block; margin-top:14px; font-size:13.5px; color:var(--cyan); font-weight:500;}
+  .proj .plink:hover{text-decoration:underline;}
+  .dark .proj p{color:var(--dark-fg2);}
 
   /* ---------- CONTACT ---------- */
   .contact-links{display:grid; grid-template-columns:repeat(2,minmax(0,320px)); gap:14px; justify-content:center; margin-top:40px;}
@@ -606,6 +609,23 @@
     <h2 class="big reveal">Explorations in silicon.</h2>
   </div>
   <div class="proj-grid">
+    <div class="proj reveal">
+      <div class="k">ICEE 2025 · CFET</div>
+      <h3>Parasitic Capacitance in Tapered CFETs</h3>
+      <p>3D TCAD and an analytical elliptical-integral model quantifying how process-induced channel taper raises parasitic capacitance — up to 23% for 3-sheet devices, with junction capacitance the dominant, most taper-sensitive contributor.</p>
+      <a class="plink" href="https://ieeexplore.ieee.org/abstract/document/11409786" target="_blank" rel="noopener">Read on IEEE Xplore ↗</a>
+    </div>
+    <div class="proj reveal">
+      <div class="k">IEEE T-ED 2025 · CFET</div>
+      <h3>Analytical Model of CFET Parasitic Capacitance</h3>
+      <p>A single-fit-parameter compact model for every parasitic component in CFETs via the elliptical integral method — capturing the ~20% separator-capacitance contribution and benchmarked against lateral nanosheet FETs.</p>
+      <a class="plink" href="https://ieeexplore.ieee.org/abstract/document/11084946" target="_blank" rel="noopener">Read on IEEE Xplore ↗</a>
+    </div>
+    <div class="proj reveal">
+      <div class="k">TCAD · GAA Nanowire</div>
+      <h3>Design &amp; DC Analysis of a GAA Si Nanowire nFET</h3>
+      <p>2D r–z cylindrical Sentaurus simulation of a 6 nm gate-all-around Si nanowire (EOT 0.9 nm) with density-gradient quantum corrections and band-to-band tunnelling: I<sub>ON</sub>/I<sub>OFF</sub> ≈ 7.5×10⁵, SS 63.5 mV/dec, DIBL 15.9 mV/V.</p>
+    </div>
     <div class="proj reveal"><div class="k">Device · HBT</div><h3>2D TCAD HBT Simulation</h3><p>Heterojunction bipolar transistor simulation across dissimilar semiconductors, targeting high-frequency performance beyond conventional BJTs.</p></div>
     <div class="proj reveal"><div class="k">Device · CFET</div><h3>3D CFET Structure</h3><p>Complementary FET integrating n- and p-type transistors on a single substrate for higher density and better power efficiency.</p></div>
     <div class="proj reveal"><div class="k">Circuit · SRAM</div><h3>Radiation-Hardened SRAM</h3><p>Speed- and power-optimized memory for space, using hardened materials and redundancy to boost radiation tolerance.</p></div>
