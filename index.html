@@ -60,11 +60,11 @@
   .subnav nav{display:flex; align-items:center; gap:30px;}
   .subnav nav a{font-size:13px; color:var(--ink-2); font-weight:400; transition:color .2s;}
   .subnav nav a:hover{color:var(--ink);}
-  .pill{
+  .subnav nav a.pill{
     background:var(--blue); color:#fff; font-size:13px; font-weight:400;
     padding:5px 15px; border-radius:980px; transition:background .2s;
   }
-  .pill:hover{background:var(--blue-hover);}
+  .subnav nav a.pill:hover{background:var(--blue-hover); color:#fff;}
   .menu-btn{display:none; background:none; border:0; padding:6px; cursor:pointer;}
   .menu-btn span{display:block; width:18px; height:1.5px; background:var(--ink); margin:4px 0;}
   @media(max-width:768px){
@@ -114,7 +114,7 @@
   }
   .btn-blue:hover{background:var(--blue-hover); transform:translateY(-1px);}
   .portrait{
-    margin:52px auto 0; width:min(300px,72vw); aspect-ratio:1; border-radius:32px;
+    margin:52px auto 0; width:min(300px,72vw); aspect-ratio:1; border-radius:50%;
     object-fit:cover; box-shadow:0 30px 70px -30px rgba(0,0,0,.35);
     display:block;
   }
@@ -177,7 +177,7 @@
   .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:6px;}
   .chip{font-size:14px; padding:8px 15px; border-radius:980px; background:#fff; border:1px solid var(--line); color:var(--ink); font-weight:500;}
   .split-photo{
-    width:100%; aspect-ratio:4/5; border-radius:28px; object-fit:cover;
+    width:100%; max-width:360px; margin:0 auto; aspect-ratio:1; border-radius:50%; object-fit:cover;
     box-shadow:0 30px 60px -30px rgba(0,0,0,.3);
   }
 
@@ -493,7 +493,7 @@
   <div class="gallery reveal">
     <!-- Replace the src of each image with your own photos.
          Upload photos to your repo (e.g. a "photos" folder) and use paths like photos/lab1.jpg -->
-    <div class="g-item g-wide g-tall"><img src="photos/lab1.jpg" alt="Wafer characterization lab" loading="lazy"><div class="cap">Wafer characterization lab</div></div>
+    <div class="g-item g-wide g-tall"><img src="lab1.jpeg" alt="Wafer characterization lab" loading="lazy"><div class="cap">Wafer characterization lab</div></div>
     <div class="g-item"><img src="lab2.jpeg" alt="Probe station" loading="lazy"><div class="cap">Probe station</div></div>
     <div class="g-item"><img src="labmates1.jpeg" alt="With lab mates" loading="lazy"><div class="cap">The nanoDC team</div></div>
     <div class="g-item g-wide"><img src="labmates2.jpeg" alt="Group photo at IIT Gandhinagar" loading="lazy"><div class="cap">Group photo, IIT Gandhinagar</div></div>
